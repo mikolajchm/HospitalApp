@@ -3,9 +3,11 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 
+const userroutes = require('./routes/user.routes');
+
 const app = express();
 
-mongoose.connect('mongodb://0.0.0.0:27017/HospitalApp');
+mongoose.connect('mongodb://0.0.0.0:27017/HospApp');
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -17,6 +19,8 @@ db.on('error', err => console.log('Error ' + err));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use('/api', userroutes);
 
 app.use('/', (req, res) => {
   res.status(404).send('notFound');
