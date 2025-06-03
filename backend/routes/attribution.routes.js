@@ -3,6 +3,8 @@ const router = express.Router();
 
 const attribution = require('../controllers/attribution.controller');
 
-router.get('/allAtribution', attribution.getAllAttribution);
+router.get('/attributions', attribution.attributions); 
+router.get('/attribution/:id', attribution.getById);
+router.delete('/attribution/:id', attribution.delete);
 
 module.exports = router;

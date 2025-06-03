@@ -2,7 +2,7 @@ const User = require('../models/User.model');
 const Session = require('../models/Session.model');
 const bcrypt = require('bcryptjs');
 
-exports.user = async (req, res) => {
+exports.users = async (req, res) => {
   try {
     return res.json(await User.find({}));
   } catch (err) {
@@ -63,7 +63,7 @@ exports.logout = async (req, res) => {
   }
 }
 
-exports.looged = async (req, res) => {
+exports.logged = async (req, res) => {
   if (req.session.user) {
     res.status(200).send({ user: req.session.user });
   } else {

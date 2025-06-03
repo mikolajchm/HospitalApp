@@ -24,7 +24,6 @@ exports.getPatientbyId = async (req, res) => {
 
 exports.postPatient = async (req, res) => {
   try {
-
     const requiredFields = [
       'firstName', 'lastName', 'peselNum', 'priority', 'age'
     ];

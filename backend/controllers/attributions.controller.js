@@ -1,6 +1,6 @@
 const Attribution = require('../models/Attribution.model');
 
-exports.getAllAttribution = async (req, res) => {
+exports.attributions = async (req, res) => {
   try {
     return res.json(await Attribution.find({}));
   } catch (err) {
@@ -8,7 +8,7 @@ exports.getAllAttribution = async (req, res) => {
   }
 }
 
-exports.getAttributionById = async (req, res) => {
+exports.getById = async (req, res) => {
   try {
     const attribution = await Attribution.findById( req.params.id );
 
@@ -22,7 +22,7 @@ exports.getAttributionById = async (req, res) => {
   }
 }
 
-exports.deleteAttribution = async (req, res) => {
+exports.delete = async (req, res) => {
   try {
     const attribution = Attribution.findById(req.params.id);
 
