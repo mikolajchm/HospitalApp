@@ -29,6 +29,21 @@ exports.register = async (req, res) => {
   }
 }
 
+exports.delete = async (req, res) => {
+  try {
+    const usertodelete = User.findById( req.params.id );
+
+    if (!usertodelete) {
+      return res.status(404).send({ message: 'User not found' });
+    } 
+
+    await User.deleteOne({ _id: req.params.id });
+    res.status(200).send({ message: 'Deleted !' });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
+
 exports.login = async (req, res) => {
   try {
     const { login, password } = req.body;
