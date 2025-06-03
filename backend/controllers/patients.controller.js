@@ -26,7 +26,7 @@ exports.postPatient = async (req, res) => {
   try {
 
     const requiredFields = [
-      'firstName', 'lastName', 'peselNum', 'priority', 'age', 'attribution'
+      'firstName', 'lastName', 'peselNum', 'priority', 'age'
     ];
 
     for (const field of requiredFields) {

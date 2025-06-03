@@ -6,7 +6,7 @@ const patientSchema = new mongoose.Schema({
   peselNum: { type: Number },
   priority: { type: String, required: true },
   age: { type: Number, required: true },
-  attribution: { type: String, required: true, ref: 'Attribution'}
+  attribution: { type: String, ref: 'Attribution'}
 });
 
 module.exports = mongoose.model('Patient', patientSchema);
