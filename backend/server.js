@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 
 const userroutes = require('./routes/user.routes');
+const patientroutes = require('./routes/patient.routes');
 const MongoStore = require('connect-mongo');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(session({
 }));
 
 app.use('/api', userroutes);
+app.use('/api', patientroutes);
 
 app.use('/', (req, res) => {
   res.status(404).send('notFound');

@@ -8,6 +8,6 @@ router.get('/user', user.user);
 router.post('/register', user.register); //do dodania pracownika i admina - potem do usuniecia 
 router.post('/login', user.login);
 router.delete('/logout', authMiddleware, user.logout);
-router.get('/sess', user.looged);
+router.get('/sess', user.looged); // dane o zalogowanym uzytkowniku req.session.user
 
 module.exports = router;
