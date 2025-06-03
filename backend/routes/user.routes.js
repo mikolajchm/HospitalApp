@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../utils/authMiddleware');
+const adminMiddleware = require('../utils/adminMiddleware');
 
 const user = require('../controllers/users.controller');
 
-router.get('/user', user.user);
+router.get('/user',adminMiddleware, user.user);
 router.post('/register', user.register); //do dodania pracownika i admina - potem do usuniecia 
 router.post('/login', user.login);
 router.delete('/logout', authMiddleware, user.logout);
