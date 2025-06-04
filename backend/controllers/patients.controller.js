@@ -1,6 +1,6 @@
 const Patient = require('../models/Patient.model');
 
-exports.allPatients = async (req, res) => {
+exports.patients = async (req, res) => {
   try {
     return res.json(await Patient.find({}));
   } catch (err) {
@@ -8,7 +8,7 @@ exports.allPatients = async (req, res) => {
   }
 }
 
-exports.getPatientbyId = async (req, res) => {
+exports.getById = async (req, res) => {
   try {
     const patient = await Patient.findById( req.params.id );
     
@@ -22,7 +22,7 @@ exports.getPatientbyId = async (req, res) => {
   }
 }
 
-exports.postPatient = async (req, res) => {
+exports.post = async (req, res) => {
   try {
     const requiredFields = [
       'firstName', 'lastName', 'peselNum', 'priority', 'age'
@@ -49,7 +49,7 @@ exports.postPatient = async (req, res) => {
   }
 }
 
-exports.deletePatient = async (req, res) => {
+exports.delete = async (req, res) => {
   try {
     const patient = await Patient.findById( req.params.id );
     
@@ -59,6 +59,23 @@ exports.deletePatient = async (req, res) => {
 
     await Ad.deleteOne({ _id: req.params.id });
     res.status(200).send({ message: 'Deleted !' });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
+
+exports.edit = async (req, res) => {
+  try {
+    const patient = await Patient.findById( req.params.id );
+
+    if (!patient) {
+      return res.status(404).send({ message: 'Patient not found' });
+    }
+
+    Object.assign(patient, req.body);
+
+    await patient.save();
+    res.status(200).send({ message: 'Updated!' });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

@@ -36,3 +36,20 @@ exports.delete = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 }
+
+exports.edit = async (req, res) => {
+  try {
+    const attribution = await Attribution.findById( req.params.id );
+
+    if (!attribution) {
+      return res.status(404).send({ message: 'Attribution not found !' });
+    }
+
+    Object.assign(attribution, req.body);
+
+    await attribution.save();
+    res.status(200).send({ message: 'Updated !' });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
