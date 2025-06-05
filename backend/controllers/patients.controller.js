@@ -38,10 +38,15 @@ exports.post = async (req, res) => {
       return res.status(400).send({ message: 'Age must be a number' });
     }
 
-    const newPatient = {...req.body};
+    const existingPatient = await Patient.findOne({ peselNum: req.body.peselNum });
+    if (existingPatient) {
+      return res.status(409).send({ message: 'Patient with this PESEL already exists' });
+    }
+
+    const newPatient = { ...req.body };
 
     const nwpatient = new Patient(newPatient);
-    await nwpatient.save()
+    await nwpatient.save();
 
     res.status(201).send({ message: 'New patient created!' });
   } catch (err) {
