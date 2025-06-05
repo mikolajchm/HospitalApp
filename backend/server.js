@@ -6,6 +6,9 @@ const session = require('express-session');
 
 const authroutes = require('./routes/auth.routes');
 const patientroutes = require('./routes/patient.routes');
+const hospitalroutes = require('./routes/hospital.routes');
+const attributionroutes = require('./routes/attribution.routes');
+
 const MongoStore = require('connect-mongo');
 
 const app = express();
@@ -31,6 +34,8 @@ app.use(session({
 
 app.use('/api/auth', authroutes);
 app.use('/api', patientroutes);
+app.use('/api', attributionroutes);
+app.use('/api', hospitalroutes);
 
 app.use('/', (req, res) => {
   res.status(404).send('notFound');

@@ -7,5 +7,6 @@ router.get('/attributions', attribution.attributions);
 router.get('/attribution/:id', attribution.getById);
 router.delete('/attribution/:id', attribution.delete);
 router.put('/attribution/:id', attribution.edit);
+router.post('/attribution', attribution.post);
 
 module.exports = router;
