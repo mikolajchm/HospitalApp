@@ -104,3 +104,67 @@ exports.edit = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 }
+
+exports.byBranch = async (req, res) => {
+  try {
+    const branchId = req.body.branchId;
+
+    const attributionByBranch = await Attribution.find({ idBranch: branchId });
+
+    if (attributionByBranch.length === 0) {
+      return res.status(404).send({ message: 'No attributions found for this branch' });
+    }
+
+    return res.json(attributionByBranch);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
+
+exports.byHospital = async (req, res) => {
+  try {
+    const hospitalId = req.body.hospitalId;
+
+    const attributionByHospital = await Attribution.find({ idHospital: hospitalId });
+
+    if (attributionByHospital.length === 0) {
+      return res.status(404).send({ message: 'No attributions found for this hospital' });
+    }
+
+    return res.json(attributionByHospital);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
+
+exports.byDoctor = async (req, res) => {
+  try {
+    const doctorId = req.body.doctorId;
+
+    const attributionByDoctor = await Attribution.find({ idDoctor: doctorId });
+
+    if (attributionByDoctor.length === 0) {
+      return res.status(404).send({ message: 'No attributions found for this doctor' });
+    }
+
+    return res.json(attributionByDoctor);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
+
+exports.byPatient = async (req, res) => {
+  try {
+    const patientId = req.body.patientId;
+
+    const attributionByPatient = await Attribution.find({ idPatient: patientId });
+
+    if (attributionByPatient.length === 0) {
+      return res.status(404).send({ message: 'No attributions found for this patient' });
+    }
+
+    return res.json(attributionByPatient);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
