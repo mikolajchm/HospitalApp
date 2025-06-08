@@ -34,8 +34,9 @@ exports.post = async (req, res) => {
       }
     }
 
-    if (typeof req.body.age !== 'number') {
-      return res.status(400).send({ message: 'Age must be a number' });
+    const parsedAge = Number(req.body.age);
+    if (isNaN(parsedAge) || parsedAge <= 0) {
+      return res.status(400).send({ message: 'Age must be a valid positive number' });
     }
 
     const existingPatient = await Patient.findOne({ peselNum: req.body.peselNum });
@@ -43,7 +44,10 @@ exports.post = async (req, res) => {
       return res.status(409).send({ message: 'Patient with this PESEL already exists' });
     }
 
-    const newPatient = { ...req.body };
+    const newPatient = {
+      ...req.body,
+      age: parsedAge, 
+    };
 
     const nwpatient = new Patient(newPatient);
     await nwpatient.save();
@@ -52,7 +56,7 @@ exports.post = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-}
+};
 
 exports.delete = async (req, res) => {
   try {
@@ -71,10 +75,18 @@ exports.delete = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const patient = await Patient.findById( req.params.id );
+    const patient = await Patient.findById(req.params.id);
 
     if (!patient) {
       return res.status(404).send({ message: 'Patient not found' });
+    }
+
+    if (req.body.hasOwnProperty('age')) {
+      const parsedAge = Number(req.body.age);
+      if (isNaN(parsedAge) || parsedAge <= 0) {
+        return res.status(400).send({ message: 'Age must be a valid positive number' });
+      }
+      req.body.age = parsedAge;
     }
 
     Object.assign(patient, req.body);
@@ -84,4 +96,4 @@ exports.edit = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-}
+};

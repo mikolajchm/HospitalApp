@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const attribution = require('../controllers/attribution.controller');
+const attribution = require('../controllers/attributions.controller');
 
 router.get('/attributions', attribution.attributions); 
 router.get('/attribution/:id', attribution.getById);
