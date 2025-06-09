@@ -5,11 +5,11 @@ const adminMiddleware = require('../utils/adminMiddleware');
 
 const auth = require('../controllers/auth.controller');
 
-router.get('/users', auth.users);
+router.get('/users', adminMiddleware, auth.users);
 router.post('/register', adminMiddleware, auth.register); //do dodania pracownika i admina - potem do usuniecia 
 router.post('/login', auth.login);
 router.delete('/userremove/:id', adminMiddleware, auth.delete);
 router.delete('/logout', authMiddleware, auth.logout);
-router.get('/logged', auth.logged); // dane o zalogowanym uzytkowniku req.session.user
+router.get('/logged', authMiddleware, auth.logged); // dane o zalogowanym uzytkowniku req.session.user
 
 module.exports = router;

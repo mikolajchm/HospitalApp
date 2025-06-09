@@ -28,9 +28,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({ 
   secret: 'aaa123', 
+  cookie: {
+    secure: process.env.NODE_ENV == 'production',
+  },
   store: MongoStore.create(mongoose.connection), 
   resave: false, 
-  saveUninitialized: false 
+  saveUninitialized: false
 }));
 
 app.use('/api/auth', authroutes);

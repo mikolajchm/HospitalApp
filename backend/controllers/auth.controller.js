@@ -13,6 +13,13 @@ exports.users = async (req, res) => {
 exports.register = async (req, res) => {
   try {
     const { firstName, lastName, login, password, role } = req.body;
+
+    const userWithLogin = await User.findOne({ login });
+
+    if (userWithLogin) {
+      res.status(409).send({ message: 'User with this login already exists' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await User.create({
@@ -52,15 +59,26 @@ exports.login = async (req, res) => {
       const user = await User.findOne({ login });
 
       if (!user) {
-        res.status(400).send({ message: 'Login or password are incorrect' });
-      } else {
-        if (bcrypt.compare(password, user.password)) {
-          req.session.user = ({ userId: user._id, login: user.login, firstName: user.firstName, lastName: user.lastName, role: user.role });
-          res.status(200).send({ message: 'Login successful' });
-        } else {
-          res.status(400).send({ message: 'Login or password are incorrect' });
-        }
+        return res.status(400).send({ message: 'Login or password are incorrect' });
       }
+
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+      if (isPasswordCorrect) {
+        req.session.user = {
+          userId: user._id,
+          login: user.login,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          role: user.role,
+        };
+
+        return res.status(200).send({ message: 'Login successfull !' });
+      } else {
+        return res.status(400).send({ message: 'Login or password are incorrect' });
+      }
+    } else {
+      return res.status(400).send({ message: 'Invalid input' });
     }
 
   } catch (err) {
@@ -80,8 +98,8 @@ exports.logout = async (req, res) => {
 
 exports.logged = async (req, res) => {
   if (req.session.user) {
-    res.status(200).send({ user: req.session.user });
+    return res.status(200).send(req.session.user);
   } else {
-    res.status(400).send({ message: 'Login or password are incorrect' });
+    return res.status(400).send({ message: 'Login or password are incorrect' });
   }
 }

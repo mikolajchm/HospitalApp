@@ -1,0 +1,29 @@
+$primary-color: #0d6efd;
+$background-color: #f8f9fa; 
+
+.footer {
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: #ffffff; 
+  border-top: 3px solid $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerContent {
+  text-align: center;
+}
+
+.footerTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $primary-color;
+  margin: 0;
+}
+
+.footerText {
+  font-size: 0.875rem;
+  color: #000000; 
+  margin-top: 0.25rem;
+}
