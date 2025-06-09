@@ -1,5 +1,7 @@
 export const getBranches = ({ branches }) => branches;
 export const getBranchesById = ({ branches }, id) => branches.find(branch => branch._id === id);
+export const getBranchesByHospId = ({ branches }, idHosp) =>
+  branches.find(branch => branch.idHospitals.includes(idHosp));
 
 const createActionName = (actionName) => `app/branch/${actionName}`;
 
