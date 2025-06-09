@@ -5,8 +5,7 @@ import NavBar from './components/views/NavBar/NavBar';
 import Footer from './components/views/Footer/Footer';
 import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
-
-
+import Logout from './components/pages/Logout/Logout';
 
 const App = () => {
 
@@ -16,7 +15,8 @@ const App = () => {
       <Container>
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path='/login' element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
