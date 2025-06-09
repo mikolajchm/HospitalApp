@@ -5,7 +5,7 @@ import styles from './NavBar.module.scss';
 import { getUser } from '../../../redux/userRedux';
 import { useSelector } from 'react-redux';
 
-function NavBar({ user }) {
+const NavBar = () => {
 
   const user = useSelector(getUser);
 
