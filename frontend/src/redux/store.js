@@ -4,14 +4,14 @@ import userReducer from './userRedux';
 import hospitalsReducer from './hospitalsRedux';
 import patientsReducer from './patientsRedux';
 import attributionsReducer from './attributionsRedux';
-import branchsReducer from './branchsRedux';
+import branchesReducer from './branchesRedux';
 
 
 const subreducers = {
   user: userReducer,
   patients: patientsReducer,
   attributions: attributionsReducer,
-  branchs: branchsReducer,
+  branches: branchesReducer,
   hospitals: hospitalsReducer
 }
 
