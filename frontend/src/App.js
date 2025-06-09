@@ -6,6 +6,7 @@ import Footer from './components/views/Footer/Footer';
 import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
 import Logout from './components/pages/Logout/Logout';
+import Home from './components/pages/Home/Home';
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>

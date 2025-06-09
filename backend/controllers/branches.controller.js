@@ -1,8 +1,8 @@
-const Branch = require('../models/Branch.model');
+const Branches = require('../models/Branches.model');
 
-exports.branchs = async (req, res) => {
+exports.branches = async (req, res) => {
   try {
-    return res.json(await Branch.find({}));
+    return res.json(await Branches.find({}));
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -10,12 +10,12 @@ exports.branchs = async (req, res) => {
 
 exports.byId = async (req, res) => {
   try {
-    const branch = await Branch.findById( req.params.id );
+    const branches = await Branches.findById( req.params.id );
 
-    if (!branch) {
+    if (!branches) {
       return res.status(404).send({ message: 'Not Found !'});
     } else {
-      return res.json(branch);
+      return res.json(branches);
     }
 
   } catch (err) {
@@ -27,7 +27,7 @@ exports.byHospitalId = async (req, res) => {
   try {
     const hospitalId = req.params.id;
 
-    const branches = await Branch.find({
+    const branches = await Branches.find({
       idHospitals: hospitalId  
     });
 

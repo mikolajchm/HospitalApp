@@ -8,7 +8,7 @@ const authroutes = require('./routes/auth.routes');
 const patientroutes = require('./routes/patient.routes');
 const hospitalroutes = require('./routes/hospital.routes');
 const attributionroutes = require('./routes/attribution.routes');
-const branchroutes = require('./routes/branch.routes');
+const branchesroutes = require('./routes/branches.routes');
 
 const MongoStore = require('connect-mongo');
 
@@ -40,7 +40,7 @@ app.use('/api/auth', authroutes);
 app.use('/api', patientroutes);
 app.use('/api', attributionroutes);
 app.use('/api', hospitalroutes);
-app.use('/api', branchroutes);
+app.use('/api', branchesroutes);
 
 app.use('/', (req, res) => {
   res.status(404).send('notFound');

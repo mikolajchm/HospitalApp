@@ -1,5 +1,20 @@
 export const getAllAttributions = ({ attributions }) => attributions;
-export const getAttributionById = ({ attributions }, id) => attributions.find(attribution => attribution._id === id);
+
+export const getAttributionById = ({ attributions }, id) =>
+  attributions.find(attribution => attribution._id === id);
+
+export const getAttributionsByPatientId = ({ attributions }, idPatient) =>
+  attributions.filter(attribution => attribution.idPatient === idPatient);
+
+export const getAttributionsByHospitalId = ({ attributions }, idHospital) =>
+  attributions.filter(attribution => attribution.idHospital === idHospital);
+
+export const getAttributionsByBranchId = ({ attributions }, idBranch) =>
+  attributions.filter(attribution => attribution.idBranch === idBranch);
+
+export const getAttributionsByDoctorId = ({ attributions }, idDoctor) =>
+  attributions.filter(attribution => attribution.idDoctor === idDoctor);
+
 
 const createActionName = actionName => `app/attribution/${actionName}`;
 
