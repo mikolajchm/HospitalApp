@@ -2,6 +2,7 @@ import styles from './AllAttributions.module.scss';
 import { useSelector } from 'react-redux';
 import { getAllAttributions } from '../../../redux/attributionsRedux';
 import { getAllPatients, getPatientById } from '../../../redux/patientsRedux';
+import { Link } from 'react-router-dom';
 
 const AllAttributions = () => {
 
@@ -26,7 +27,9 @@ const AllAttributions = () => {
               <strong>Pacjent:</strong> {patient ? `${patient.firstName} ${patient.lastName}` : 'Unknown'}
               <strong>Numer Pesel Pacjenta:</strong><p>{patient.peselNum}</p>
             </div>
-            <button className={styles.readMoreButton}>Pokaż Więcej</button>
+            <Link to={`/attribution/${attribution._id}`} className={styles.readMoreButton}>
+              Pokaż Więcej
+            </Link>
           </div>
         );
       })}

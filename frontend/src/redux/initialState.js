@@ -2,8 +2,8 @@ const initialState = {
   user: null,
   patients: [],
   attributions: [],
-  branchs: [],
-  hosptials: []
+  branches: [],
+  hospitals: []
 };
 
 export default initialState;

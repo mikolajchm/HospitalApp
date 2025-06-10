@@ -10,6 +10,7 @@ import Home from './components/pages/Home/Home';
 import AllPatients from './components/pages/AllPatients/AllPatients';
 import AllAttributions from './components/pages/AllAttributions/AllAttributions';
 import SinglePatient from './components/pages/SinglePatient/SinglePatient';
+import SingleAttribution from './components/pages/SingleAttribution/SingleAttribution';
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/allPatients" element={<AllPatients />} />
           <Route path="/allAttributions" element={<AllAttributions/>} />
           <Route path="/patient/:id" element={<SinglePatient />} />
+          <Route path="/attribution/:id" element={<SingleAttribution />} />
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

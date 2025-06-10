@@ -16,7 +16,7 @@ export const deleteHosp = payload => ({
   payload
 })
 
-const hospitalReducer = (statePart = null, action) => {
+const hospitalsReducer = (statePart = null, action) => {
   switch(action.type){
     case LOAD_HOSP:
       return action.payload;
@@ -27,4 +27,4 @@ const hospitalReducer = (statePart = null, action) => {
   }
 };
 
-export default hospitalReducer;
+export default hospitalsReducer;

@@ -59,7 +59,7 @@ const Home = () => {
         <h1 className={styles.sectionTitle}>Szpitale</h1>
         <div className={styles.cardsGrid}>
           {hospitals.map(hospital => (
-            <div key={hospital.id} className={styles.hospitalCard}>
+            <div key={hospital._id} className={styles.hospitalCard}>
               <h2 className={styles.hospitalName}>{hospital.name}</h2>
               <p className={styles.hospitalAddress}>📍Adres: {hospital.address}</p>
               <p className={styles.hospitalPhone}>📞Tel: {hospital.phone}</p>
@@ -79,7 +79,7 @@ const Home = () => {
               });
 
             return (
-              <div key={branch.id} className={styles.branchCard}>
+              <div key={branch._id} className={styles.branchCard}>
                 <h2 className={styles.branchName}>{branch.name}</h2>
                 <p className={styles.numOfPlaces}>Ilość miejsc: {branch.numOfPlaces}</p>
                 <p className={styles.numOfPlacesUrgent}>Ilość miejsc pilnych: {branch.numOfPlacesUrgent}</p>
