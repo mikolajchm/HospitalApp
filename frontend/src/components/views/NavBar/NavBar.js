@@ -21,12 +21,6 @@ const NavBar = () => {
               <Nav.Link as={Link} to="/home" className={styles.navLink}>
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/ad/add/ad" className={styles.navLink}>
-                Add patient
-              </Nav.Link>
-              <Nav.Link as={Link} to="/ad/add/ad" className={styles.navLink}>
-                Add attribution
-              </Nav.Link>
               <Nav.Link as={Link} to="/logout" className={styles.navLink}>
                 LogOut
               </Nav.Link>

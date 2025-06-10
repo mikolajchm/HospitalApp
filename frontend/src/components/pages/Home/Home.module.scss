@@ -1,0 +1,136 @@
+.homeContainer {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 2px solid #e0e4ea;
+  border-radius: 20px;
+  padding: 30px;
+  background: linear-gradient(135deg, #ffffff, #f0f4f8);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  font-size: 2.4rem;
+  color: #222;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.hospitalCard {
+  background: linear-gradient(135deg, #6ec1ff, #4a90e2);
+  border-radius: 16px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(74, 144, 226, 0.4);
+  }
+}
+
+.hospitalName {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.hospitalAddress,
+.hospitalPhone {
+  font-size: 1rem;
+  margin: 6px 0;
+  opacity: 0.9;
+}
+
+.branchCard {
+  background: linear-gradient(135deg, #7af0d7, #24c6dc);
+  border-radius: 16px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(36, 198, 220, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(36, 198, 220, 0.4);
+  }
+}
+
+.branchName {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.numOfPlaces,
+.numOfPlacesUrgent,
+.branchAddress,
+.branchPhone {
+  font-size: 1rem;
+  margin: 6px 0;
+  opacity: 0.9;
+}
+
+.loadingText {
+  font-size: 1.5rem;
+  color: #4a90e2;
+  text-align: center;
+  padding: 40px;
+}
+
+.actionPanel {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 24px 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(118, 75, 162, 0.3);
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  background: #fff;
+  color: #764ba2;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(118, 75, 162, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+
+  &:hover {
+    background-color: #764ba2;
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(118, 75, 162, 0.5);
+  }
+
+  &:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+}

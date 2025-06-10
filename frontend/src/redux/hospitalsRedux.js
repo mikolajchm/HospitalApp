@@ -1,4 +1,5 @@
 export const getHospitals = ({ hospitals }) => hospitals;
+export const getHospitalById = ({ hospitals }, id) => hospitals.find(hospital => hospital._id === id);
 
 const createActionName = (actionName) => `app/hospital/${actionName}`;
 
