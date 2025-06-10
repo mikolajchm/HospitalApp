@@ -8,6 +8,8 @@ import Login from './components/pages/Login/Login';
 import Logout from './components/pages/Logout/Logout';
 import Home from './components/pages/Home/Home';
 import AllPatients from './components/pages/AllPatients/AllPatients';
+import AllAttributions from './components/pages/AllAttributions/AllAttributions';
+import SinglePatient from './components/pages/SinglePatient/SinglePatient';
 
 const App = () => {
 
@@ -20,6 +22,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/allPatients" element={<AllPatients />} />
+          <Route path="/allAttributions" element={<AllAttributions/>} />
+          <Route path="/patient/:id" element={<SinglePatient />} />
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

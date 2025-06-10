@@ -1,0 +1,70 @@
+.patientContainer {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: #fef9f4; // delikatny beż
+  border: 2px solid #ffcc80; // pastelowy pomarańcz
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(255, 204, 128, 0.3);
+}
+
+.patientTitle {
+  font-size: 2rem;
+  color: #ff7043; // intensywny koralowy
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.patientInfo {
+  font-size: 1.1rem;
+  color: #222222; // czysty czarny, nie szarość
+  line-height: 1.6;
+}
+
+.patientInfo p {
+  margin-bottom: 12px;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.buttonRed {
+  background-color: #e53935; // czerwony
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #c62828;
+  }
+}
+
+.buttonBlue {
+  background-color: #1e88e5; // niebieski
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #1565c0;
+  }
+}
+
+.loadingText {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 80px;
+  color: #ff7043;
+}

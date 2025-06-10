@@ -1,0 +1,73 @@
+.attributionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 32px;
+}
+
+.attributionCard {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb; // lżejszy niż #e0e0e0
+  border-radius: 16px;
+  padding: 24px;
+  width: 300px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.attributionId {
+  color: #111827; // ciemniejszy, nowoczesny
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.patientId {
+  color: #374151; // ciemny szary
+  font-size: 1rem;
+}
+
+.patientName {
+  color: #1f2937; // bardzo ciemny szary
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.patientName strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.readMoreButton {
+  margin-top: auto;
+  align-self: flex-start;
+  background-color: #3b82f6; // tailwind blue-500
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: #2563eb; // blue-600
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  }
+}
+
+.loadingText {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 80px;
+  color: #6b7280; // gray-500
+}

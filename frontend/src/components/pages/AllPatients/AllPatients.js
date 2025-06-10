@@ -1,21 +1,9 @@
-import { API_URL } from '../../../config';
-import { useEffect } from 'react';
 import styles from './AllPatients.module.scss';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllPatients, updatePatients } from '../../../redux/patientsRedux';
+import { useSelector } from 'react-redux';
+import { getAllPatients } from '../../../redux/patientsRedux';
+import { Link } from 'react-router-dom';
 
 const AllPatients = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const options = {
-      method: 'GET',
-    };
-
-    fetch(`${API_URL}/allPatients`, options)
-      .then((res) => res.json())
-      .then((data) => dispatch(updatePatients(data)));
-  }, [dispatch]);
 
   const patients = useSelector(getAllPatients);
 
@@ -31,7 +19,9 @@ const AllPatients = () => {
             {patient.firstName} {patient.lastName}
           </h2>
           <p className={styles.patientPesel}>PESEL: {patient.peselNum}</p>
-          <button className={styles.readMoreButton}>Read more</button>
+          <Link to={`/patient/${patient._id}`} className={styles.readMoreButton}>
+            Pokaż Więcej
+          </Link>
         </div>
       ))}
     </div>

@@ -24,13 +24,13 @@ const EDIT_ATTRIBUTION = createActionName('EDIT_ATTRIBUTION');
 const DELETE_ATTRIBUTION = createActionName('DELETE_ATTRIBUTION');
 const CLEAR_ATTRIBUTIONS = createActionName('CLEAR_ATTRIBUTIONS');
 
-export const updateATTRIBUTIONs = payload => ({ type: UPDATE_ATTRIBUTIONS, payload });
-export const addATTRIBUTION = payload => ({ type: ADD_ATTRIBUTION, payload });
-export const editATTRIBUTION = payload => ({ type: EDIT_ATTRIBUTION, payload });
-export const deleteATTRIBUTION = payload => ({ type: DELETE_ATTRIBUTION, payload });
-export const clearATTRIBUTIONs = () => ({ type: CLEAR_ATTRIBUTIONS });
+export const updateAttributions = payload => ({ type: UPDATE_ATTRIBUTIONS, payload });
+export const addAttribution = payload => ({ type: ADD_ATTRIBUTION, payload });
+export const editAttribution = payload => ({ type: EDIT_ATTRIBUTION, payload });
+export const deleteAttribution = payload => ({ type: DELETE_ATTRIBUTION, payload });
+export const clearAttributions = () => ({ type: CLEAR_ATTRIBUTIONS });
 
-const ATTRIBUTIONsReducer = (statePart = [], action) => {
+const attributionsReducer = (statePart = [], action) => {
   switch (action.type) {
     case UPDATE_ATTRIBUTIONS:
       return [...action.payload];
@@ -47,4 +47,4 @@ const ATTRIBUTIONsReducer = (statePart = [], action) => {
   };
 };
 
-export default ATTRIBUTIONsReducer;
+export default attributionsReducer;

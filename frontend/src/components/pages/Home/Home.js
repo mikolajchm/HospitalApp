@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getHospitals, getHospitalById, loadHosp } from '../../../redux/hospitalsRedux';
 import { getBranches, loadBranches } from '../../../redux/branchesRedux';
+import { updateAttributions } from '../../../redux/attributionsRedux';
+import { updatePatients } from '../../../redux/patientsRedux';
 
 const Home = () => {
 
@@ -22,6 +24,14 @@ const Home = () => {
     fetch(`${API_URL}/hospitals`, options)
       .then(res => res.json())
       .then(data => dispatch(loadHosp(data)));
+
+    fetch(`${API_URL}/allPatients`, options)
+      .then((res) => res.json())
+      .then((data) => dispatch(updatePatients(data)));
+
+    fetch(`${API_URL}/attributions`, options)
+      .then((res) => res.json())
+      .then((data) => dispatch(updateAttributions(data)));
   }, [dispatch]);
 
   const hospitals = useSelector(getHospitals);
@@ -40,7 +50,9 @@ const Home = () => {
         <Link to="/allPatients" className={styles.actionButton}>
           Baza pacjentów
         </Link>
-        <button className={styles.actionButton}>Baza kart przypisań</button>
+        <Link to="/allAttributions" className={styles.actionButton}>
+          Baza kart przypisań
+        </Link>
       </section>
 
       <section className={styles.section}>
