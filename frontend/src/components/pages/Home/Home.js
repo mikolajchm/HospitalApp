@@ -1,41 +1,19 @@
 import styles from './Home.module.scss';
-import { API_URL } from '../../../config';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { getHospitals, getHospitalById, loadHosp } from '../../../redux/hospitalsRedux';
-import { getBranches, loadBranches } from '../../../redux/branchesRedux';
-import { updateAttributions } from '../../../redux/attributionsRedux';
-import { updatePatients } from '../../../redux/patientsRedux';
+import { Link, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getHospitals, getHospitalById } from '../../../redux/hospitalsRedux';
+import { getBranches } from '../../../redux/branchesRedux';
+import { getUser } from '../../../redux/userRedux'; 
 
 const Home = () => {
 
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    const options = {
-      method: 'GET'
-    };
-
-    fetch(`${API_URL}/branches`, options)
-      .then(res => res.json())
-      .then(data => dispatch(loadBranches(data)));
-
-    fetch(`${API_URL}/hospitals`, options)
-      .then(res => res.json())
-      .then(data => dispatch(loadHosp(data)));
-
-    fetch(`${API_URL}/allPatients`, options)
-      .then((res) => res.json())
-      .then((data) => dispatch(updatePatients(data)));
-
-    fetch(`${API_URL}/attributions`, options)
-      .then((res) => res.json())
-      .then((data) => dispatch(updateAttributions(data)));
-  }, [dispatch]);
-
+  const user = useSelector(getUser); 
   const hospitals = useSelector(getHospitals);
   const branches = useSelector(getBranches);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   if (!hospitals || hospitals.length === 0 || !branches || branches.length === 0) {
     return <p className={styles.loadingText}>Loading...</p>;
@@ -43,7 +21,6 @@ const Home = () => {
 
   return (
     <div className={styles.homeContainer}>
-
       <section className={styles.actionPanel}>
         <button className={styles.actionButton}>Dodaj pacjenta</button>
         <button className={styles.actionButton}>Dodaj kartę przypisania</button>

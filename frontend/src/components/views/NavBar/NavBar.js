@@ -21,6 +21,13 @@ const NavBar = () => {
               <Nav.Link as={Link} to="/home" className={styles.navLink}>
                 Home
               </Nav.Link>
+
+              {user.role === 'Admin' && (
+                <Nav.Link as={Link} to="/register" className={styles.navLink}>
+                  Register User
+                </Nav.Link>
+              )}
+
               <Nav.Link as={Link} to="/logout" className={styles.navLink}>
                 LogOut
               </Nav.Link>

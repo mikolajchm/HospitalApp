@@ -1,12 +1,22 @@
 import { useParams, Link } from "react-router-dom";
-import { getAllAttributions, getAttributionById } from "../../../redux/attributionsRedux";
+import { getAllAttributions, getAttributionById, deleteAttribution } from "../../../redux/attributionsRedux";
 import { getHospitals, getHospitalById } from "../../../redux/hospitalsRedux";
 import { getBranches, getBranchesById } from "../../../redux/branchesRedux";
 import { getAllPatients, getPatientById } from "../../../redux/patientsRedux";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styles from './SingleAttribution.module.scss';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import { API_URL } from '../../../config';
+
 
 const SingleAttribution = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -16,6 +26,31 @@ const SingleAttribution = () => {
   const hospitals = useSelector(getHospitals);
   const branches = useSelector(getBranches);
   const patients = useSelector(getAllPatients);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleRemove = (e) => {
+    e.preventDefault(); 
+
+    const options = { method: 'DELETE' };
+
+    fetch(`${API_URL}/attribution/${id}`, options)
+      .then(res => {
+        if (res.status === 200) {
+          setShow(false);
+          dispatch(deleteAttribution(id));
+          navigate("/home");
+        } else {
+          console.error('Remove failed');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   const hospital = getHospitalById({ hospitals }, attribution.idHospital);
   const branch = getBranchesById({ branches }, attribution.idBranch);
@@ -45,7 +80,23 @@ const SingleAttribution = () => {
         <p><strong>Opis:</strong> {attribution.description}</p>
       </div>
       <div className={styles.buttonsContainer}>
-        <button className={styles.buttonRed}>Usuń</button>
+        <button className={styles.buttonRed} onClick={handleShow} >
+          Usuń
+        </button>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Czy jesteś pewien?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Ta operacja jest nieodwracalna. Czy chcesz kontynuować?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Zamknij
+            </Button>
+            <Button variant="danger" onClick={handleRemove}>
+              Usuń
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );

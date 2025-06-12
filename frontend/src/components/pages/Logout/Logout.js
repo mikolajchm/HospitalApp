@@ -17,7 +17,7 @@ const Logout = () => {
     fetch(`${API_URL}/auth/logout`, options)
       .then(() => {
           dispatch(logOut());
-          navigate('/home');
+          navigate('/login');
         })
   }, [dispatch, navigate]);
 

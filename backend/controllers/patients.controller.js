@@ -39,14 +39,18 @@ exports.post = async (req, res) => {
       return res.status(400).send({ message: 'Age must be a valid positive number' });
     }
 
-    const existingPatient = await Patient.findOne({ peselNum: req.body.peselNum });
+    const pesel = req.body.peselNum;
+    const existingPatient = pesel !== 'Nie podano'
+      ? await Patient.findOne({ peselNum: pesel })
+      : null;
+
     if (existingPatient) {
       return res.status(409).send({ message: 'Patient with this PESEL already exists' });
     }
 
     const newPatient = {
       ...req.body,
-      age: parsedAge, 
+      age: parsedAge,
     };
 
     const nwpatient = new Patient(newPatient);
@@ -56,7 +60,7 @@ exports.post = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-};
+}
 
 exports.delete = async (req, res) => {
   try {
@@ -66,7 +70,7 @@ exports.delete = async (req, res) => {
       return res.status(404).send({ message: 'Patient not found with this ID' });
     } 
 
-    await Ad.deleteOne({ _id: req.params.id });
+    await Patient.deleteOne({ _id: req.params.id });
     res.status(200).send({ message: 'Deleted !' });
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -89,6 +93,17 @@ exports.edit = async (req, res) => {
       req.body.age = parsedAge;
     }
 
+    if (req.body.peselNum && req.body.peselNum !== 'Nie podano') {
+      const existingPatient = await Patient.findOne({
+        peselNum: req.body.peselNum,
+        _id: { $ne: req.params.id }
+      });
+
+      if (existingPatient) {
+        return res.status(409).send({ message: 'Another patient with this PESEL already exists' });
+      }
+    }
+
     Object.assign(patient, req.body);
 
     await patient.save();
@@ -96,4 +111,4 @@ exports.edit = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-};
+}

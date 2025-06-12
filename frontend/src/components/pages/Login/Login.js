@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
-import { Form, FormGroup, Button, Spinner, Alert, Container, Card } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import {
+  Form,
+  FormGroup,
+  Button,
+  Spinner,
+  Alert,
+  Container,
+  Card,
+} from 'react-bootstrap';
 import styles from './Login.module.scss';
 import { logIn } from '../../../redux/userRedux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { API_URL } from '../../../config';
+import { loadBranches } from '../../../redux/branchesRedux';
+import { loadHosp } from '../../../redux/hospitalsRedux';
+import { updatePatients } from '../../../redux/patientsRedux';
+import { updateAttributions } from '../../../redux/attributionsRedux';
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,67 +28,68 @@ const Login = () => {
 
   useEffect(() => {
     if (status === 'success') {
+      const options = { method: 'GET' };
+
+      fetch(`${API_URL}/branches`, options)
+        .then((res) => res.json())
+        .then((data) => dispatch(loadBranches(data)));
+
+      fetch(`${API_URL}/hospitals`, options)
+        .then((res) => res.json())
+        .then((data) => dispatch(loadHosp(data)));
+
+      fetch(`${API_URL}/allPatients`, options)
+        .then((res) => res.json())
+        .then((data) => dispatch(updatePatients(data)));
+
+      fetch(`${API_URL}/attributions`, options)
+        .then((res) => res.json())
+        .then((data) => dispatch(updateAttributions(data)));
+
       const timeout = setTimeout(() => {
         navigate('/home');
       }, 500);
 
-      return () => clearTimeout(timeout); 
+      return () => clearTimeout(timeout);
     }
-  }, [status, navigate]);
+  }, [status, dispatch, navigate]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        login, 
-        password
-      })
-    };
+    setStatus('loading');
 
-    const option = {
-      method: 'GET',
-    };
+    try {
+      const loginRes = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ login, password }),
+      });
 
-   
-  fetch(`${API_URL}/auth/login`, options)
-    .then(res => {
-      if (res.status === 200) {
+      if (loginRes.status === 200) {
+        const userRes = await fetch(`${API_URL}/auth/logged`, {
+          method: 'GET',
+        });
+
+        if (!userRes.ok) throw new Error('User fetch failed');
+
+        const userData = await userRes.json();
+        dispatch(logIn(userData));
         setStatus('success');
-        return fetch(`${API_URL}/auth/logged`, option)
-          .then(res => {
-            if (res.status === 200) {
-              return res.json();
-            } else {
-              throw new Error('Failed to fetch logged user');
-            }
-          })
-          .then(data => {
-            dispatch(logIn(data)); 
-          });
-      } else if (res.status === 400) {
+      } else if (loginRes.status === 400) {
         setStatus('clientError');
-        throw new Error('Client Error');
       } else {
         setStatus('serverError');
-        throw new Error('Server Error');
       }
-    })
-    .catch(err => {
-      setStatus('serverError');
+    } catch (err) {
       console.error(err);
-    });
+      setStatus('serverError');
+    }
   };
 
   return (
     <Container className={styles.loginPage}>
       <Card className={styles.loginCard}>
         <Form className={styles.loginForm} onSubmit={handleSubmit}>
-
           <h1 className={styles.logintitle}>Login</h1>
 
           {status === 'success' && (
@@ -96,7 +107,7 @@ const Login = () => {
 
           {status === 'clientError' && (
             <Alert variant="danger" className={styles.loginAlert}>
-              <Alert.Heading>Incorrect data</Alert.Heading>
+              <Alert.Heading>Incorrect login or password</Alert.Heading>
             </Alert>
           )}
 
@@ -116,6 +127,7 @@ const Login = () => {
               onChange={(e) => setLogin(e.target.value)}
               placeholder="Enter login"
               className={styles.formControl}
+              required
             />
           </FormGroup>
 
@@ -127,10 +139,16 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
               className={styles.formControl}
+              required
             />
           </FormGroup>
 
-          <Button variant="primary" type="submit" className={styles.loginButton}>
+          <Button
+            variant="primary"
+            type="submit"
+            className={styles.loginButton}
+            disabled={status === 'loading'}
+          >
             Log in
           </Button>
         </Form>
