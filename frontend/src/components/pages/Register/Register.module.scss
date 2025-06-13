@@ -1,0 +1,72 @@
+$form-bg: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+$accent-color: #00bcd4;
+$primary-color: #00838f;
+$text-color: #004d40;
+
+.formWrapper {
+  background: $form-bg;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
+  margin: 3rem auto;
+  max-width: 700px;
+}
+
+.heading {
+  text-align: center;
+  font-weight: 600;
+  color: $primary-color;
+  margin-bottom: 2rem;
+}
+
+.inputGroup {
+  margin-bottom: 1.4rem;
+}
+
+.label {
+  font-weight: 500;
+  color: $text-color;
+}
+
+.input {
+  border: 2px solid transparent;
+  border-radius: 0.6rem;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.3);
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.button {
+  background-color: $accent-color;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 2.2rem;
+  font-weight: 500;
+  color: white;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-color;
+  }
+}
+
+.alert {
+  margin-bottom: 1.2rem;
+  border-radius: 0.8rem;
+}
+
+.spinner {
+  text-align: center;
+  margin: 1rem 0;
+}

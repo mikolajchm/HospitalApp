@@ -1,15 +1,37 @@
 import styles from './Home.module.scss';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import { updatePatients } from '../../../redux/patientsRedux';
+import { updateAttributions } from '../../../redux/attributionsRedux';
 import { useSelector } from 'react-redux';
 import { getHospitals, getHospitalById } from '../../../redux/hospitalsRedux';
 import { getBranches } from '../../../redux/branchesRedux';
+import { API_URL } from '../../../config';
 import { getUser } from '../../../redux/userRedux'; 
 
 const Home = () => {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const user = useSelector(getUser); 
   const hospitals = useSelector(getHospitals);
   const branches = useSelector(getBranches);
+
+  useEffect(() => {
+    const options = { method: 'GET' };
+
+    fetch(`${API_URL}/allPatients`, options)
+      .then((res) => res.json())
+      .then((data) => dispatch(updatePatients(data)));
+
+    fetch(`${API_URL}/attributions`, options)
+      .then((res) => res.json())
+      .then((data) => dispatch(updateAttributions(data)));
+
+  }, [dispatch, navigate]);
 
   if (!user) {
     return <Navigate to="/login" replace />;
@@ -22,8 +44,12 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <section className={styles.actionPanel}>
-        <button className={styles.actionButton}>Dodaj pacjenta</button>
-        <button className={styles.actionButton}>Dodaj kartę przypisania</button>
+        <Link to="/addPatient" className={styles.actionButton}>
+          Dodaj pacjenta
+        </Link>
+        <Link to="/addAttribution" className={styles.actionButton}>
+          Dodaj kartę przypisania
+        </Link>
         <Link to="/allPatients" className={styles.actionButton}>
           Baza pacjentów
         </Link>

@@ -15,8 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../../config';
 import { loadBranches } from '../../../redux/branchesRedux';
 import { loadHosp } from '../../../redux/hospitalsRedux';
-import { updatePatients } from '../../../redux/patientsRedux';
-import { updateAttributions } from '../../../redux/attributionsRedux';
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -37,14 +36,6 @@ const Login = () => {
       fetch(`${API_URL}/hospitals`, options)
         .then((res) => res.json())
         .then((data) => dispatch(loadHosp(data)));
-
-      fetch(`${API_URL}/allPatients`, options)
-        .then((res) => res.json())
-        .then((data) => dispatch(updatePatients(data)));
-
-      fetch(`${API_URL}/attributions`, options)
-        .then((res) => res.json())
-        .then((data) => dispatch(updateAttributions(data)));
 
       const timeout = setTimeout(() => {
         navigate('/home');

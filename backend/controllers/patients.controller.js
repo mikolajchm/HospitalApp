@@ -40,7 +40,7 @@ exports.post = async (req, res) => {
     }
 
     const pesel = req.body.peselNum;
-    const existingPatient = pesel !== 'Nie podano'
+    const existingPatient = pesel !== 'Nie podano!'
       ? await Patient.findOne({ peselNum: pesel })
       : null;
 
@@ -93,7 +93,7 @@ exports.edit = async (req, res) => {
       req.body.age = parsedAge;
     }
 
-    if (req.body.peselNum && req.body.peselNum !== 'Nie podano') {
+    if (req.body.peselNum && req.body.peselNum !== 'Nie podano!') {
       const existingPatient = await Patient.findOne({
         peselNum: req.body.peselNum,
         _id: { $ne: req.params.id }
