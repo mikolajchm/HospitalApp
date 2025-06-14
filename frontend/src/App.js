@@ -15,6 +15,7 @@ import Register from './components/pages/Register/Register';
 import AddPatient from './components/pages/AddPatient/AddPatient';
 import AddAttribution from './components/pages/AddAttribution/AddAttribution';
 import EditAttribution from './components/pages/EditAttribution/EditAttribution';
+import EditPatient from './components/pages/EditPatient/EditPatient';
 
 const App = () => {
 
@@ -28,9 +29,10 @@ const App = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="/allPatients" element={<AllPatients />} />
           <Route path="/addPatient" element={<AddPatient />} />
+          <Route path="/patient/:id" element={<SinglePatient />} />
+          <Route path="/editPatient/:id" element={<EditPatient />} />
           <Route path="/allAttributions" element={<AllAttributions/>} />
           <Route path="/addAttribution" element={<AddAttribution/>} />
-          <Route path="/patient/:id" element={<SinglePatient />} />
           <Route path="/attribution/:id" element={<SingleAttribution />} />
           <Route path="/editAttribution/:id" element={<EditAttribution />} />
           <Route path="/register" element={<Register />} />

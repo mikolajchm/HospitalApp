@@ -1,0 +1,109 @@
+$form-bg-color: #fff;
+$form-border-radius: 12px;
+$form-padding: 30px 40px;
+$primary-color: #4a90e2;
+$primary-hover: #357ABD;
+$danger-color: #e74c3c;
+$warning-color: #f39c12;
+$success-color: #27ae60;
+$input-bg: #f9f9f9;
+$input-border: #ddd;
+$input-focus-border: $primary-color;
+$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+.formWrapper {
+  max-width: 480px;
+  margin: 2rem auto;
+  background-color: $form-bg-color;
+  padding: $form-padding;
+  border-radius: $form-border-radius;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: $font-family;
+  color: #333;
+}
+
+.heading {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1.8rem;
+  color: $primary-color;
+}
+
+.alert {
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+
+  .spinner-border {
+    color: $primary-color;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.inputGroup {
+  margin-bottom: 1.3rem;
+
+  .label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .input,
+  .select {
+    width: 100%;
+    padding: 0.45rem 0.8rem;
+    font-size: 1rem;
+    border: 1.8px solid $input-border;
+    border-radius: 8px;
+    background-color: $input-bg;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: $input-focus-border;
+      outline: none;
+      box-shadow: 0 0 8px rgba($primary-color, 0.3);
+      background-color: #fff;
+    }
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+
+  .button {
+    background-color: $primary-color;
+    border: none;
+    padding: 0.65rem 2.3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background-color: $primary-hover;
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    &:active {
+      transform: translateY(0);
+      background-color: $primary-color;
+    }
+  }
+}

@@ -80,7 +80,9 @@ const SinglePatient = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <button className={styles.buttonBlue}>Edytuj</button>
+        <Link to={`/editPatient/${patient._id}`} className={styles.buttonBlue}>
+          Edytuj
+        </Link>
       </div>
     </div>
   );
