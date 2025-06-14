@@ -80,6 +80,9 @@ const SingleAttribution = () => {
         <p><strong>Opis:</strong> {attribution.description}</p>
       </div>
       <div className={styles.buttonsContainer}>
+        <Link to={`/editAttribution/${attribution._id}`} className={styles.buttonGreen}>
+          Edytuj
+        </Link>
         <button className={styles.buttonRed} onClick={handleShow} >
           Usuń
         </button>

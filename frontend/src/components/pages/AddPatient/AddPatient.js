@@ -15,7 +15,7 @@ const AddPatient = () => {
   const [peselNum, setPeselNum] = useState('');
   const [priority, setPriority] = useState('');
   const [age, setAge] = useState('');
-  const [attribution, setAttribution] = useState(null);
+  const [attribution] = useState(null);
   const [status, setStatus] = useState(null);
 
   useEffect(() => {

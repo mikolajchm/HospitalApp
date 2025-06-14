@@ -14,6 +14,7 @@ import SingleAttribution from './components/pages/SingleAttribution/SingleAttrib
 import Register from './components/pages/Register/Register';
 import AddPatient from './components/pages/AddPatient/AddPatient';
 import AddAttribution from './components/pages/AddAttribution/AddAttribution';
+import EditAttribution from './components/pages/EditAttribution/EditAttribution';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/addAttribution" element={<AddAttribution/>} />
           <Route path="/patient/:id" element={<SinglePatient />} />
           <Route path="/attribution/:id" element={<SingleAttribution />} />
+          <Route path="/editAttribution/:id" element={<EditAttribution />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />

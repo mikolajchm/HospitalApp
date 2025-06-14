@@ -68,6 +68,23 @@
   }
 }
 
+.buttonGreen {
+  background-color: #00ff8c;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  color: black;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0f8502;
+  }
+}
+
 .loadingText {
   font-size: 1.5rem;
   text-align: center;

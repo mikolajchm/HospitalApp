@@ -1,0 +1,97 @@
+$form-gap: 1.5rem;
+$input-padding: 0.75rem;
+$border-radius: 1rem;
+$color-primary: #1a73e8;
+$color-bg: #f7f9fc;
+$color-text: #333;
+$color-muted: #777;
+$color-border: #ddd;
+
+.formWrapper {
+  max-width: 600px;
+  margin: 3rem auto;
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: $border-radius;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  color: $color-text;
+
+  @media (max-width: 600px) {
+    padding: 2rem 1.5rem;
+    margin: 2rem 1rem;
+  }
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: $color-primary;
+}
+
+.inputGroup {
+  margin-bottom: $form-gap;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: $color-muted;
+  }
+
+  select,
+  input,
+  textarea {
+    width: 100%;
+    padding: $input-padding;
+    font-size: 1rem;
+    border: 1px solid $color-border;
+    border-radius: 0.5rem;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 2rem;
+  background-color: $color-primary;
+  color: white;
+  border: none;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: darken($color-primary, 5%);
+  }
+}
+
+.alert {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}

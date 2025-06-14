@@ -23,7 +23,7 @@ const AddAttribution = () => {
   const [idPatient, setIdPatient] = useState('');
   const [idHospital, setIdHospital] = useState('');
   const [idBranch, setIdBranch] = useState('');
-  const [idDoctor, setIdDoctor] = useState(user.id);
+  const [idDoctor] = useState(user.id);
   const [date, setDate] = useState('');
   const [condition, setCondition] = useState('');
   const [description, setDescription] = useState('');
