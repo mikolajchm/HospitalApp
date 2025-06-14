@@ -14,7 +14,10 @@ const MongoStore = require('connect-mongo');
 
 const app = express();
 
-mongoose.connect('mongodb://0.0.0.0:27017/HospApp');
+mongoose.connect('mongodb+srv://HospApp:user123@cluster0.4ftarpx.mongodb.net/HospApp?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 const db = mongoose.connection;
 
 db.once('open', () => {

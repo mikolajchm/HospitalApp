@@ -1,27 +1,30 @@
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { API_URL } from '../../../config';
-import { useNavigate, useParams } from 'react-router';
 import Spinner from 'react-bootstrap/Spinner';
-import { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert';
-import styles from './EditAttribution.module.scss';
-import { useSelector } from 'react-redux';
+
+import { API_URL } from '../../../config';
 import { getAllPatients } from '../../../redux/patientsRedux';
 import { getHospitals } from '../../../redux/hospitalsRedux';
 import { getBranches } from '../../../redux/branchesRedux';
 import { getUser } from '../../../redux/userRedux';
+import { getAttributionById } from '../../../redux/attributionsRedux'; 
+
+import styles from './EditAttribution.module.scss';
 
 const EditAttribution = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const attribution = useSelector(state => getAttributionById(state, id));
   const patients = useSelector(getAllPatients);
   const hospitals = useSelector(getHospitals);
   const branches = useSelector(getBranches);
   const user = useSelector(getUser);
 
-  const [attribution, setAttribution] = useState(null);
   const [status, setStatus] = useState(null);
 
   const [idPatient, setIdPatient] = useState('');
@@ -32,19 +35,15 @@ const EditAttribution = () => {
   const [description, setDescription] = useState('');
 
   useEffect(() => {
-    fetch(`${API_URL}/attribution/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setAttribution(data);
-        setIdPatient(data.idPatient || '');
-        setIdHospital(data.idHospital || '');
-        setIdBranch(data.idBranch || '');
-        setDate(data.date ? data.date.substring(0, 10) : '');
-        setCondition(data.condition || '');
-        setDescription(data.description || '');
-      })
-      .catch(() => setStatus('serverError'));
-  }, [id]);
+    if (attribution) {
+      setIdPatient(attribution.idPatient || '');
+      setIdHospital(attribution.idHospital || '');
+      setIdBranch(attribution.idBranch || '');
+      setDate(attribution.date ? attribution.date.substring(0, 10) : '');
+      setCondition(attribution.condition || '');
+      setDescription(attribution.description || '');
+    }
+  }, [attribution]);
 
   useEffect(() => {
     if (status === 'success') {
@@ -57,12 +56,21 @@ const EditAttribution = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
     if (!idPatient || !idHospital || !idBranch || !date || !condition || !description) {
       setStatus('danger');
       return;
     }
 
-    const payload = { idPatient, idHospital, idBranch, idDoctor: user.id, date, condition, description };
+    const payload = {
+      idPatient,
+      idHospital,
+      idBranch,
+      idDoctor: user.id,
+      date,
+      condition,
+      description,
+    };
 
     setStatus('loading');
     fetch(`${API_URL}/attribution/${id}`, {
@@ -71,7 +79,7 @@ const EditAttribution = () => {
       body: JSON.stringify(payload),
     })
       .then(res => {
-        if (res.status === 200) setStatus('success');
+        if (res.ok) setStatus('success');
         else setStatus('danger');
       })
       .catch(() => setStatus('serverError'));
@@ -79,7 +87,7 @@ const EditAttribution = () => {
 
   const minDate = new Date().toISOString().split('T')[0];
 
-  if (!attribution) return <p>Loading attribution data...</p>;
+  if (!attribution) return <p>Ładowanie danych przypisania...</p>;
 
   return (
     <Form onSubmit={handleSubmit} className={styles.formWrapper}>
@@ -88,7 +96,11 @@ const EditAttribution = () => {
       {status === 'success' && <Alert variant="success" className={styles.alert}>Zaktualizowano przypisanie!</Alert>}
       {status === 'danger' && <Alert variant="danger" className={styles.alert}>Uzupełnij wszystkie pola.</Alert>}
       {status === 'serverError' && <Alert variant="danger" className={styles.alert}>Błąd serwera – spróbuj ponownie.</Alert>}
-      {status === 'loading' && <div className={styles.spinner}><Spinner animation="border" /></div>}
+      {status === 'loading' && (
+        <div className={styles.spinner}>
+          <Spinner animation="border" />
+        </div>
+      )}
 
       <Form.Group className={styles.inputGroup}>
         <Form.Label>Pacjent:</Form.Label>
@@ -104,10 +116,13 @@ const EditAttribution = () => {
 
       <Form.Group className={styles.inputGroup}>
         <Form.Label>Oddział:</Form.Label>
-        <Form.Select value={idBranch} onChange={e => {
-          setIdBranch(e.target.value);
-          setIdHospital('');
-        }}>
+        <Form.Select
+          value={idBranch}
+          onChange={e => {
+            setIdBranch(e.target.value);
+            setIdHospital('');
+          }}
+        >
           <option value=''>Wybierz oddział</option>
           {branches.map(b => (
             <option key={b._id} value={b._id}>{b.name}</option>
@@ -117,7 +132,11 @@ const EditAttribution = () => {
 
       <Form.Group className={styles.inputGroup}>
         <Form.Label>Szpital:</Form.Label>
-        <Form.Select value={idHospital} onChange={e => setIdHospital(e.target.value)} disabled={!idBranch}>
+        <Form.Select
+          value={idHospital}
+          onChange={e => setIdHospital(e.target.value)}
+          disabled={!idBranch}
+        >
           <option value=''>Wybierz szpital</option>
           {(() => {
             const selectedBranch = branches.find(b => b._id === idBranch);
