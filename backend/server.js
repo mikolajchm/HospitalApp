@@ -39,11 +39,17 @@ app.use(session({
   saveUninitialized: false
 }));
 
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 app.use('/api/auth', authroutes);
 app.use('/api', patientroutes);
 app.use('/api', attributionroutes);
 app.use('/api', hospitalroutes);
 app.use('/api', branchesroutes);
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
 
 app.use('/', (req, res) => {
   res.status(404).send('notFound');

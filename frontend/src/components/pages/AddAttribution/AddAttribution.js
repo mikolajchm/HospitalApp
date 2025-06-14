@@ -111,7 +111,7 @@ const AddAttribution = () => {
             if (!selectedBranch) return null;
 
             return hospitals
-              .filter(h => selectedBranch.idHospitals.includes(h._id))
+              .filter(h => selectedBranch.idHospitals.map(String).includes(String(h._id)))
               .map(h => (
                 <option key={h._id} value={h._id}>{h.name}</option>
               ));
