@@ -15,7 +15,6 @@ const authMiddleware = async (req, res, next) => {
       const sessionRecord = sessions[0];
       const sessionData = JSON.parse(sessionRecord.session);
 
-      
       req.session.user = {
         id: sessionData.user.userId,
         login: sessionData.user.login,
@@ -23,8 +22,6 @@ const authMiddleware = async (req, res, next) => {
         lastName: sessionData.user.lastName,
         role: sessionData.user.role
       };
-
-      
 
       await Session.deleteMany({
         _id: { $ne: sessionRecord._id }

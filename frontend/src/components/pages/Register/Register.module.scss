@@ -70,3 +70,14 @@ $text-color: #004d40;
   text-align: center;
   margin: 1rem 0;
 }
+
+.notAuthorized {
+  margin-top: 3rem;
+  text-align: center;
+
+  .alert {
+    display: inline-block;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

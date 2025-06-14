@@ -16,7 +16,6 @@ import { API_URL } from '../../../config';
 import { loadBranches } from '../../../redux/branchesRedux';
 import { loadHosp } from '../../../redux/hospitalsRedux';
 
-
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,26 +23,7 @@ const Login = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(null);
-
-  useEffect(() => {
-    if (status === 'success') {
-      const options = { method: 'GET' };
-
-      fetch(`${API_URL}/branches`, options)
-        .then((res) => res.json())
-        .then((data) => dispatch(loadBranches(data)));
-
-      fetch(`${API_URL}/hospitals`, options)
-        .then((res) => res.json())
-        .then((data) => dispatch(loadHosp(data)));
-
-      const timeout = setTimeout(() => {
-        navigate('/home');
-      }, 500);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [status, dispatch, navigate]);
+  const [userData, setUserData] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,7 +44,7 @@ const Login = () => {
         if (!userRes.ok) throw new Error('User fetch failed');
 
         const userData = await userRes.json();
-        dispatch(logIn(userData));
+        setUserData(userData);
         setStatus('success');
       } else if (loginRes.status === 400) {
         setStatus('clientError');
@@ -76,6 +56,28 @@ const Login = () => {
       setStatus('serverError');
     }
   };
+
+  useEffect(() => {
+    if (status === 'success' && userData) {
+      dispatch(logIn(userData));
+
+      fetch(`${API_URL}/branches`)
+        .then((res) => res.json())
+        .then((data) => dispatch(loadBranches(data)))
+        .catch((err) => console.error('Failed to load branches:', err));
+
+      fetch(`${API_URL}/hospitals`)
+        .then((res) => res.json())
+        .then((data) => dispatch(loadHosp(data)))
+        .catch((err) => console.error('Failed to load hospitals:', err));
+
+      const timeout = setTimeout(() => {
+        navigate('/home');
+      }, 500);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [status, userData, dispatch, navigate]);
 
   return (
     <Container className={styles.loginPage}>

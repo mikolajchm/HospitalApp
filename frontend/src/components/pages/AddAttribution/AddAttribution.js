@@ -76,29 +76,46 @@ const AddAttribution = () => {
         <Form.Label>Pacjent:</Form.Label>
         <Form.Select value={idPatient} onChange={e => setIdPatient(e.target.value)}>
           <option value=''>Wybierz pacjenta</option>
-          {patients.map(p => (
-            <option key={p._id} value={p._id}>{`${p.firstName} ${p.lastName} (${p.peselNum})`}</option>
+          {patients
+            .filter(p => p.attribution === null)
+            .map(p => (
+              <option key={p._id} value={p._id}>
+                {`${p.firstName} ${p.lastName} (${p.peselNum})`}
+              </option>
+            ))}
+        </Form.Select>
+      </Form.Group>
+
+      <Form.Group className={styles.inputGroup}>
+        <Form.Label>Oddział:</Form.Label>
+        <Form.Select
+          value={idBranch}
+          onChange={e => {
+            setIdBranch(e.target.value);
+            setIdHospital('');  
+          }}
+        >
+          <option value=''>Wybierz oddział</option>
+          {branches.map(b => (
+            <option key={b._id} value={b._id}>{b.name}</option>
           ))}
         </Form.Select>
       </Form.Group>
 
       <Form.Group className={styles.inputGroup}>
         <Form.Label>Szpital:</Form.Label>
-        <Form.Select value={idHospital} onChange={e => setIdHospital(e.target.value)}>
+        <Form.Select value={idHospital} onChange={e => setIdHospital(e.target.value)} disabled={!idBranch}>
           <option value=''>Wybierz szpital</option>
-          {hospitals.map(h => (
-            <option key={h._id} value={h._id}>{h.name}</option>
-          ))}
-        </Form.Select>
-      </Form.Group>
+          {(() => {
+            const selectedBranch = branches.find(b => b._id === idBranch);
+            if (!selectedBranch) return null;
 
-      <Form.Group className={styles.inputGroup}>
-        <Form.Label>Oddział:</Form.Label>
-        <Form.Select value={idBranch} onChange={e => setIdBranch(e.target.value)}>
-          <option value=''>Wybierz oddział</option>
-          {branches.map(b => (
-            <option key={b._id} value={b._id}>{b.name}</option>
-          ))}
+            return hospitals
+              .filter(h => selectedBranch.idHospitals.includes(h._id))
+              .map(h => (
+                <option key={h._id} value={h._id}>{h.name}</option>
+              ));
+          })()}
         </Form.Select>
       </Form.Group>
 

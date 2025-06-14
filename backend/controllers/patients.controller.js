@@ -34,18 +34,23 @@ exports.post = async (req, res) => {
       }
     }
 
-    const parsedAge = Number(req.body.age);
-    if (isNaN(parsedAge) || parsedAge <= 0) {
-      return res.status(400).send({ message: 'Age must be a valid positive number' });
+    const pesel = req.body.peselNum;
+
+    if (!(pesel === 'Nie podano!' || /^\d{11}$/.test(pesel))) {
+      return res.status(400).send({ message: 'PESEL must be exactly 11 digits or "Nie podano!"' });
     }
 
-    const pesel = req.body.peselNum;
     const existingPatient = pesel !== 'Nie podano!'
       ? await Patient.findOne({ peselNum: pesel })
       : null;
 
     if (existingPatient) {
       return res.status(409).send({ message: 'Patient with this PESEL already exists' });
+    }
+
+    const parsedAge = Number(req.body.age);
+    if (isNaN(parsedAge) || parsedAge <= 0) {
+      return res.status(400).send({ message: 'Age must be a valid positive number' });
     }
 
     const newPatient = {
@@ -93,22 +98,30 @@ exports.edit = async (req, res) => {
       req.body.age = parsedAge;
     }
 
-    if (req.body.peselNum && req.body.peselNum !== 'Nie podano!') {
-      const existingPatient = await Patient.findOne({
-        peselNum: req.body.peselNum,
-        _id: { $ne: req.params.id }
-      });
+    if (req.body.hasOwnProperty('peselNum')) {
+      const pesel = req.body.peselNum;
 
-      if (existingPatient) {
-        return res.status(409).send({ message: 'Another patient with this PESEL already exists' });
+      if (!(pesel === 'Nie podano!' || /^\d{11}$/.test(pesel))) {
+        return res.status(400).send({ message: 'PESEL must be exactly 11 digits or "Nie podano!"' });
+      }
+
+      if (pesel !== 'Nie podano!') {
+        const existingPatient = await Patient.findOne({
+          peselNum: pesel,
+          _id: { $ne: req.params.id }
+        });
+
+        if (existingPatient) {
+          return res.status(409).send({ message: 'Another patient with this PESEL already exists' });
+        }
       }
     }
 
     Object.assign(patient, req.body);
-
     await patient.save();
+
     res.status(200).send({ message: 'Updated!' });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-}
+};

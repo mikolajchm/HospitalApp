@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
     <Navbar bg="light" expand="lg" className={styles.navbar}>
       <Container>
-        <Navbar.Brand as={Link} to="/" className={styles.brand}>
+        <Navbar.Brand as={Link} to="/home" className={styles.brand}>
           HospitallApp
         </Navbar.Brand>
         <Nav className="ms-auto">
@@ -36,9 +36,6 @@ const NavBar = () => {
             <>
               <Nav.Link as={Link} to="/login" className={styles.navLink}>
                 LogIn
-              </Nav.Link>
-              <Nav.Link as={Link} to="/register" className={styles.navLink}>
-                Sign up
               </Nav.Link>
             </>
           )}

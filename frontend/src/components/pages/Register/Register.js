@@ -7,10 +7,15 @@ import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../../redux/userRedux';
 import styles from './Register.module.scss';
 
 const Register = () => {
+
   const navigate = useNavigate();
+
+  const user = useSelector(getUser);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -59,6 +64,14 @@ const Register = () => {
       })
       .catch(() => setStatus('serverError'));
   };
+
+  if (!user || user.role !== 'Admin') {
+    return (
+      <div className={styles.notAuthorized}>
+        <Alert variant="danger">Brak dostępu. Tylko administrator może zakładać konta.</Alert>
+      </div>
+    );
+  }
 
   return (
     <Form onSubmit={handleSubmit} className={styles.formWrapper}>
@@ -134,6 +147,7 @@ const Register = () => {
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
+              <option value="">-- wybierz rolę --</option>
               <option value="User">Użytkownik</option>
               <option value="Admin">Administrator</option>
             </Form.Select>
