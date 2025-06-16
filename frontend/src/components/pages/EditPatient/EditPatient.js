@@ -6,8 +6,10 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import { API_URL } from '../../../config';
+import { Navigate } from 'react-router-dom';
 import { getPatientById } from '../../../redux/patientsRedux'; 
 import styles from './EditPatient.module.scss';
+import { getUser } from '../../../redux/userRedux';
 
 const EditPatient = () => {
   
@@ -15,6 +17,7 @@ const EditPatient = () => {
   const navigate = useNavigate();
 
   const patient = useSelector(state => getPatientById(state, id));
+  const user = useSelector(getUser);
 
   const [firstName, setFirstName] = useState(patient.firstName || '');
   const [lastName, setLastName] = useState(patient.lastName || '');
@@ -63,6 +66,10 @@ const EditPatient = () => {
       })
       .catch(() => setStatus('serverError'));
   };
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <Form onSubmit={handleSubmit} className={styles.formWrapper}>

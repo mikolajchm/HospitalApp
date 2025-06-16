@@ -2,13 +2,21 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getAllAttributions } from "../../../redux/attributionsRedux";
 import styles from './SingleBranch.module.scss'; 
+import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { getUser } from "../../../redux/userRedux";
 
 const SingleBranch = () => {
+
   const { id } = useParams(); 
   const attributions = useSelector(getAllAttributions); 
+  const user = useSelector(getUser);
 
   const branchAttributions = attributions.filter(attr => attr.idBranch === id);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className={styles.container}>

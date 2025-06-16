@@ -11,6 +11,7 @@ import { getAllPatients } from '../../../redux/patientsRedux';
 import { getHospitals } from '../../../redux/hospitalsRedux';
 import { getBranches } from '../../../redux/branchesRedux';
 import { getUser } from '../../../redux/userRedux';
+import { Navigate } from 'react-router-dom';
 
 const AddAttribution = () => {
   const navigate = useNavigate();
@@ -63,7 +64,11 @@ const AddAttribution = () => {
   };
 
   const minDate = new Date().toISOString().split('T')[0];
-
+  
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+  
   return (
     <Form onSubmit={handleSubmit} className={styles.formWrapper}>
       <h1 className={styles.heading}>Nowe przypisanie</h1>
@@ -93,7 +98,7 @@ const AddAttribution = () => {
           value={idBranch}
           onChange={e => {
             setIdBranch(e.target.value);
-            setIdHospital('');  
+            setIdHospital('');
           }}
         >
           <option value=''>Wybierz oddział</option>

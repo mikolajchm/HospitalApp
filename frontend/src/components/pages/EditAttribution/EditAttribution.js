@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
-
+import { Navigate } from 'react-router-dom';
 import { API_URL } from '../../../config';
 import { getAllPatients } from '../../../redux/patientsRedux';
 import { getHospitals } from '../../../redux/hospitalsRedux';
@@ -88,6 +88,10 @@ const EditAttribution = () => {
   const minDate = new Date().toISOString().split('T')[0];
 
   if (!attribution) return <p>Ładowanie danych przypisania...</p>;
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <Form onSubmit={handleSubmit} className={styles.formWrapper}>

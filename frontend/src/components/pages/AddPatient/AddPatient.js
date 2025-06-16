@@ -6,6 +6,9 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import styles from './AddPatient.module.scss';
+import { getUser } from '../../../redux/userRedux';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 const AddPatient = () => {
   const navigate = useNavigate();
@@ -17,6 +20,8 @@ const AddPatient = () => {
   const [age, setAge] = useState('');
   const [attribution] = useState(null);
   const [status, setStatus] = useState(null);
+
+  const user = useSelector(getUser)
 
   useEffect(() => {
     if (status === 'success') {
@@ -60,6 +65,10 @@ const AddPatient = () => {
       .catch(() => setStatus('serverError'));
   };
 
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+  
   return (
     <Form onSubmit={handleSubmit} className={styles.formWrapper}>
       <h1 className={styles.heading}>Dodaj pacjenta</h1>

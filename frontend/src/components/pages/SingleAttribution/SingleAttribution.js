@@ -11,6 +11,8 @@ import styles from './SingleAttribution.module.scss';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { API_URL } from '../../../config';
+import { Navigate } from 'react-router-dom';
+import { getUser } from "../../../redux/userRedux";
 
 
 const SingleAttribution = () => {
@@ -26,6 +28,7 @@ const SingleAttribution = () => {
   const hospitals = useSelector(getHospitals);
   const branches = useSelector(getBranches);
   const patients = useSelector(getAllPatients);
+  const user = useSelector(getUser)
 
   const [show, setShow] = useState(false);
 
@@ -58,6 +61,10 @@ const SingleAttribution = () => {
 
   if (!attribution || !hospital || !branch || !patient) {
     return <p className={styles.loadingText}>Loading attribution data...</p>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
   }
 
   return (

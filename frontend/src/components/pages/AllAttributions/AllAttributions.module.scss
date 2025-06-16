@@ -8,7 +8,7 @@
 
 .attributionCard {
   background-color: #bcfdea;
-  border: 1px solid #000000; // lżejszy niż #e0e0e0
+  border: 1px solid #000000; 
   border-radius: 16px;
   padding: 24px;
   width: 300px;
@@ -25,18 +25,18 @@
 }
 
 .attributionId {
-  color: #111827; // ciemniejszy, nowoczesny
+  color: #111827;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
 .patientId {
-  color: #374151; // ciemny szary
+  color: #374151; 
   font-size: 1rem;
 }
 
 .patientName {
-  color: #1f2937; // bardzo ciemny szary
+  color: #1f2937; 
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -49,7 +49,7 @@
 .readMoreButton {
   margin-top: auto;
   align-self: flex-start;
-  background-color: #3b82f6; // tailwind blue-500
+  background-color: #3b82f6; 
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -61,7 +61,7 @@
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    background-color: #2563eb; // blue-600
+    background-color: #2563eb; 
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
   }
 }
@@ -70,11 +70,11 @@
   font-size: 1.5rem;
   text-align: center;
   margin-top: 80px;
-  color: #6b7280; // gray-500
+  color: #6b7280; 
 }
 
 .buttonRed {
-  background-color: #ef4444; // tailwind red-500
+  background-color: #ef4444; 
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -86,7 +86,7 @@
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    background-color: #b91c1c; // red-700
+    background-color: #b91c1c; 
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
   }
 

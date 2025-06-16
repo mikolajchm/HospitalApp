@@ -2,10 +2,17 @@ import styles from './AllPatients.module.scss';
 import { useSelector } from 'react-redux';
 import { getAllPatients } from '../../../redux/patientsRedux';
 import { Link } from 'react-router-dom';
+import { getUser } from '../../../redux/userRedux';
+import { Navigate } from 'react-router-dom';
 
 const AllPatients = () => {
 
   const patients = useSelector(getAllPatients);
+  const user = useSelector(getUser);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   if (!patients || patients.length === 0) {
     return <p className={styles.loadingText}>Loading...</p>;

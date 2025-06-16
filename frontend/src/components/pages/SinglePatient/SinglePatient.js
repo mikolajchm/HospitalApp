@@ -6,14 +6,18 @@ import styles from './SinglePatient.module.scss';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { API_URL } from "../../../config";
+import { Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../../../redux/userRedux";
 
 const SinglePatient = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const patients = useSelector(getAllPatients);
   const patient = getPatientById({ patients }, id);
+  const user = useSelector(getUser);
 
   const [show, setShow] = useState(false);
 
@@ -41,6 +45,10 @@ const SinglePatient = () => {
 
   if (!patient) {
     return <p className={styles.loadingText}>Loading patient data...</p>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
   }
 
   return (

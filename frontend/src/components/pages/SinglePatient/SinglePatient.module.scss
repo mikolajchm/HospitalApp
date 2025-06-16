@@ -2,22 +2,22 @@
   max-width: 600px;
   margin: 40px auto;
   padding: 32px;
-  background-color: #fef9f4; // delikatny beż
-  border: 2px solid #ffcc80; // pastelowy pomarańcz
+  background-color: #fef9f4; 
+  border: 2px solid #ffcc80; 
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(255, 204, 128, 0.3);
 }
 
 .patientTitle {
   font-size: 2rem;
-  color: #ff7043; // intensywny koralowy
+  color: #ff7043; 
   margin-bottom: 24px;
   text-align: center;
 }
 
 .patientInfo {
   font-size: 1.1rem;
-  color: #222222; // czysty czarny, nie szarość
+  color: #222222; 
   line-height: 1.6;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .buttonRed {
-  background-color: #e53935; // czerwony
+  background-color: #e53935; 
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -48,7 +48,7 @@
 }
 
 .buttonBlue {
-  background-color: #1e88e5; // niebieski
+  background-color: #1e88e5; 
   color: #ffffff;
   text-decoration: none;
   border: none;

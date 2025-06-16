@@ -7,12 +7,15 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { API_URL } from '../../../config';
+import { getUser } from '../../../redux/userRedux';
+import { Navigate } from 'react-router-dom';
 
 const AllAttributions = () => {
   
   const dispatch = useDispatch();
   const attributions = useSelector(getAllAttributions);
   const patients = useSelector(getAllPatients); 
+  const user = useSelector(getUser);
 
   const [show, setShow] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -50,6 +53,10 @@ const AllAttributions = () => {
       });
   };
 
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+  
   return (
     <div className={styles.attributionsContainer}>
       {attributions.map((attribution) => {

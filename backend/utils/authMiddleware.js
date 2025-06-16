@@ -6,12 +6,10 @@ const authMiddleware = async (req, res, next) => {
    
       const sessions = await Session.find({});
 
-    
       if (!sessions.length) {
         return res.status(401).send({ message: 'You are not authorized' });
       }
 
-     
       const sessionRecord = sessions[0];
       const sessionData = JSON.parse(sessionRecord.session);
 
@@ -27,7 +25,6 @@ const authMiddleware = async (req, res, next) => {
         _id: { $ne: sessionRecord._id }
       });
 
-     
       next();
 
     } catch (err) {
