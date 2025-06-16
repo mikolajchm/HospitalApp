@@ -19,11 +19,11 @@ const adminMiddleware = async (req, res, next) => {
       }
 
       req.session.user = {
-        id: user.userId,
-        login: user.login,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        role: user.role,
+        id: sessionData.user.userId,
+        login: sessionData.user.login,
+        firstName: sessionData.user.firstName,
+        lastName: sessionData.user.lastName,
+        role: sessionData.user.role
       };
      
       await Session.deleteMany({ _id: { $ne: sessionRecord._id } });

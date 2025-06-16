@@ -1,0 +1,57 @@
+.usersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffffff, #8bfbff);
+  min-height: 80vh;
+}
+
+.userCard {
+  background: linear-gradient(145deg, #29c2ff 0%, #05f370 99%, #39f50e 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(255, 105, 135, 0.3);
+  padding: 20px 25px;
+  width: 260px;
+  color: #4a2c2a;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(255, 105, 135, 0.5);
+  }
+
+  p {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+}
+
+.buttonRed {
+  background-color: #ff5c5c;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(255, 92, 92, 0.6);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    background-color: #e04545;
+    box-shadow: 0 6px 15px rgba(224, 69, 69, 0.8);
+  }
+}
+
+.loadingText {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ff5c5c;
+  margin-top: 40px;
+}

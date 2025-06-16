@@ -135,3 +135,18 @@
     outline-offset: 2px;
   }
 }
+
+.branch {
+  text-decoration: none;
+}
+.numOfAttributions {
+  font-weight: bold;
+}
+
+.numOfAttributionsUrgent {
+  color: #e74c3c; // czerwony
+}
+
+.numOfAttributionsRegular {
+  color: #2980b9; // niebieski
+}

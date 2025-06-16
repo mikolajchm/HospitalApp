@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { updatePatients } from '../../../redux/patientsRedux';
-import { updateAttributions } from '../../../redux/attributionsRedux';
+import { getAllPatients, updatePatients } from '../../../redux/patientsRedux';
+import { getAllAttributions, updateAttributions } from '../../../redux/attributionsRedux';
 import { useSelector } from 'react-redux';
 import { getHospitals, getHospitalById } from '../../../redux/hospitalsRedux';
 import { getBranches } from '../../../redux/branchesRedux';
@@ -19,6 +19,7 @@ const Home = () => {
   const user = useSelector(getUser); 
   const hospitals = useSelector(getHospitals);
   const branches = useSelector(getBranches);
+  const attributions = useSelector(getAllAttributions);
 
   useEffect(() => {
     const options = { method: 'GET' };
@@ -81,15 +82,27 @@ const Home = () => {
                 return hospital ? hospital.name : 'Nieznany szpital';
               });
 
+            const totalPlaces = branch.numOfPlaces + branch.numOfPlacesUrgent;
+            const attributionsForBranch = attributions.filter(attr => attr.idBranch === branch._id);
+            const urgentCount = attributionsForBranch.filter(attr => attr.priority === 'Pilny').length;
+            const regularCount = attributionsForBranch.filter(attr => attr.priority === 'Zwykły').length;
+            const totalCount = attributionsForBranch.length;
+
             return (
-              <div key={branch._id} className={styles.branchCard}>
-                <h2 className={styles.branchName}>{branch.name}</h2>
-                <p className={styles.numOfPlaces}>Ilość miejsc: {branch.numOfPlaces}</p>
-                <p className={styles.numOfPlacesUrgent}>Ilość miejsc pilnych: {branch.numOfPlacesUrgent}</p>
-                <p className={styles.hospitalNames}>
-                  Szpitale: {hospitalNames.join(', ')}
-                </p>
-              </div>
+              <Link key={branch._id} to={`/branch/${branch._id}`} className={styles.branch}>
+                <div className={styles.branchCard}>
+                  <h2 className={styles.branchName}>{branch.name}</h2>
+                  <p className={styles.numOfPlaces}>🛏️ Ilość miejsc: {branch.numOfPlaces}</p>
+                  <p className={styles.numOfPlacesUrgent}>🚨 Ilość miejsc pilnych: {branch.numOfPlacesUrgent}</p>
+                  <p className={styles.numOfPlacesUrgent}>Ilość miejsc razem: {totalPlaces}</p>
+                  <p className={styles.numOfAttributions}>🧾 Przypisań razem: {totalCount}</p>
+                  <p className={styles.numOfAttributionsUrgent}>📍 Pilne: {urgentCount}</p>
+                  <p className={styles.numOfAttributionsRegular}>📌 Zwykłe: {regularCount}</p>
+                  <p className={styles.hospitalNames}>
+                    🏥 Szpitale: {hospitalNames.join(', ')}
+                  </p>
+                </div>
+              </Link>
             );
           })}
         </div>

@@ -24,6 +24,7 @@ const AddAttribution = () => {
   const [idHospital, setIdHospital] = useState('');
   const [idBranch, setIdBranch] = useState('');
   const [idDoctor] = useState(user.id);
+  const [priority, setPriority] = useState('');
   const [date, setDate] = useState('');
   const [condition, setCondition] = useState('');
   const [description, setDescription] = useState('');
@@ -40,12 +41,12 @@ const AddAttribution = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!idPatient || !idHospital || !idBranch || !idDoctor || !date || !condition || !description) {
+    if (!idPatient || !idHospital || !idBranch || !priority || !idDoctor || !date || !condition || !description) {
       setStatus('danger');
       return;
     }
 
-    const payload = { idPatient, idHospital, idBranch, idDoctor, date, condition, description };
+    const payload = { idPatient, idHospital, idBranch, priority, idDoctor, date, condition, description };
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -120,6 +121,19 @@ const AddAttribution = () => {
       </Form.Group>
 
       <Form.Group className={styles.inputGroup}>
+        <Form.Label className={styles.label}>Priorytet:</Form.Label>
+        <Form.Select
+          value={priority}
+          onChange={e => setPriority(e.target.value)}
+          className={styles.select}
+        >
+          <option value="">Wybierz</option>
+          <option value="Pilny">Pilny</option>
+          <option value="Zwykły">Zwykły</option>
+        </Form.Select>
+      </Form.Group>
+
+      <Form.Group className={styles.inputGroup}>
         <Form.Label>Data przyjęcia:</Form.Label>
         <Form.Control
           type="date"
@@ -130,7 +144,7 @@ const AddAttribution = () => {
       </Form.Group>
 
       <Form.Group className={styles.inputGroup}>
-        <Form.Label>Stan pacjenta:</Form.Label>
+        <Form.Label>Samopoczucie pacjenta:</Form.Label>
         <Form.Control
           type="text"
           value={condition}

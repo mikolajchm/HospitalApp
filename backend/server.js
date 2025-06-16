@@ -3,6 +3,9 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
+require('dotenv').config();
+
+console.log('NODE_ENV =', process.env.NODE_ENV);
 
 const authroutes = require('./routes/auth.routes');
 const patientroutes = require('./routes/patient.routes');

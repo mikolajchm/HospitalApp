@@ -13,7 +13,7 @@ const AddPatient = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [peselNum, setPeselNum] = useState('');
-  const [priority, setPriority] = useState('');
+  const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
   const [attribution] = useState(null);
   const [status, setStatus] = useState(null);
@@ -30,7 +30,7 @@ const AddPatient = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !peselNum || !priority || !age) {
+    if (!firstName || !lastName || !peselNum || !gender || !age) {
       setStatus('danger');
       return;
     }
@@ -44,7 +44,7 @@ const AddPatient = () => {
         firstName, 
         lastName,
         peselNum,
-        priority,
+        gender,
         age,
         attribution
       }),
@@ -117,15 +117,15 @@ const AddPatient = () => {
       </Form.Group>
 
       <Form.Group className={styles.inputGroup}>
-        <Form.Label className={styles.label}>Priorytet:</Form.Label>
+        <Form.Label className={styles.label}>Płeć:</Form.Label>
         <Form.Select
-          value={priority}
-          onChange={e => setPriority(e.target.value)}
+          value={gender}
+          onChange={e => setGender(e.target.value)}
           className={styles.select}
         >
           <option value="">Wybierz</option>
-          <option value="high">Pilny</option>
-          <option value="normal">Zwykły</option>
+          <option value="Kobieta">Kobieta</option>
+          <option value="Mężczyzna">Mężczyzna</option>
         </Form.Select>
       </Form.Group>
 

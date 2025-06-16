@@ -16,6 +16,7 @@ exports.post = async (req, res) => {
       idHospital,
       idBranch,
       idDoctor,
+      priority,
       date,
       condition,
       description,
@@ -26,6 +27,7 @@ exports.post = async (req, res) => {
       'idHospital',
       'idBranch',
       'idDoctor',
+      'priority',
       'date',
       'condition',
       'description'
@@ -42,6 +44,7 @@ exports.post = async (req, res) => {
       idHospital,
       idBranch,
       idDoctor,
+      priority,
       date,
       condition,
       description,

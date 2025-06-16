@@ -76,7 +76,8 @@ const SingleAttribution = () => {
         <p><strong>Oddział:</strong> {branch.name}</p>
         <p><strong>ID Lekarza:</strong> {attribution.idDoctor}</p>
         <p><strong>Data:</strong> {attribution.date}</p>
-        <p><strong>Stan Pacjenta:</strong> {attribution.condition}</p>
+        <p><strong>Priorytet:</strong> {attribution.priority}</p>
+        <p><strong>Samopoczucie Pacjenta:</strong> {attribution.condition}</p>
         <p><strong>Opis:</strong> {attribution.description}</p>
       </div>
       <div className={styles.buttonsContainer}>

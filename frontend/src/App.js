@@ -16,6 +16,8 @@ import AddPatient from './components/pages/AddPatient/AddPatient';
 import AddAttribution from './components/pages/AddAttribution/AddAttribution';
 import EditAttribution from './components/pages/EditAttribution/EditAttribution';
 import EditPatient from './components/pages/EditPatient/EditPatient';
+import SingleBranch from './components/pages/SingleBranch/SingleBranch';
+import Users from './components/pages/Users/Users';
 
 const App = () => {
 
@@ -35,6 +37,8 @@ const App = () => {
           <Route path="/addAttribution" element={<AddAttribution/>} />
           <Route path="/attribution/:id" element={<SingleAttribution />} />
           <Route path="/editAttribution/:id" element={<EditAttribution />} />
+          <Route path="/branch/:id" element={<SingleBranch />} />
+          <Route path="/users" element={<Users />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />

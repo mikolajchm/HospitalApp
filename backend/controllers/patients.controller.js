@@ -25,7 +25,7 @@ exports.getById = async (req, res) => {
 exports.post = async (req, res) => {
   try {
     const requiredFields = [
-      'firstName', 'lastName', 'peselNum', 'priority', 'age'
+      'firstName', 'lastName', 'peselNum', 'gender', 'age'
     ];
 
     for (const field of requiredFields) {

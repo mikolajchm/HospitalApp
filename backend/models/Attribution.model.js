@@ -5,6 +5,7 @@ const attributionSchema = new mongoose.Schema({
   idHospital: { type: String, required: true, ref: 'Hospital' },
   idBranch: { type: String, required: true, ref: 'Branch' },
   idDoctor: { type: String, required: true, ref: 'User' },
+  priority: { type: String, required: true },
   date: { type: String, required: true },
   condition: { type: String, required: true },
   description: { type: String, required: true} 

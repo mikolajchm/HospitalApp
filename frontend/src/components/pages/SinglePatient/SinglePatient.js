@@ -52,6 +52,7 @@ const SinglePatient = () => {
         <p><strong>Wiek:</strong> {patient.age}</p>
         <p><strong>Numer PESEL:</strong> {patient.peselNum}</p>
         <p><strong>Priorytet:</strong> {patient.priority}</p>
+        <p><strong>Płeć:</strong> {patient.gender}</p>
         <p>
           <strong>Karta Przypisania:</strong>{' '}
           {patient.attribution ? (
@@ -65,18 +66,18 @@ const SinglePatient = () => {
         <p><strong>ID Pacjenta:</strong> {patient._id}</p>
       </div>
       <div className={styles.buttonsContainer}>
-        <button className={styles.buttonRed} onClick={handleShow}>Usuń z bazy</button>
+        <button className={styles.buttonRed} onClick={handleShow}>Wypisz</button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Are you sure?</Modal.Title>
           </Modal.Header>
-          <Modal.Body>This operation is irreversible. Do you want to proceed?</Modal.Body>
+          <Modal.Body>Czy jesteś pewny/a ? Ta operacja jest nieodwracalna!</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-              Close
+              Zamknij
             </Button>
             <Button variant="danger" onClick={handleRemove}> 
-              Remove
+              Wypisz
             </Button>
           </Modal.Footer>
         </Modal>
