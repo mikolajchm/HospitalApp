@@ -18,16 +18,6 @@ const adminMiddleware = async (req, res, next) => {
         return res.status(403).send({ message: 'You are not admin' });
       }
 
-      req.session.user = {
-        id: sessionData.user.userId,
-        login: sessionData.user.login,
-        firstName: sessionData.user.firstName,
-        lastName: sessionData.user.lastName,
-        role: sessionData.user.role
-      };
-     
-      await Session.deleteMany({ _id: { $ne: sessionRecord._id } });
-
       next();
     } catch (err) {
       return res.status(401).send({ message: 'You are not authorized' });

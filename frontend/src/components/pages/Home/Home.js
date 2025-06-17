@@ -39,7 +39,7 @@ const Home = () => {
   }
 
   if (!hospitals || hospitals.length === 0 || !branches || branches.length === 0) {
-    return <p className={styles.loadingText}>Loading...</p>;
+    return <p className={styles.loadingText}>Ładowanie...</p>;
   }
 
   return (

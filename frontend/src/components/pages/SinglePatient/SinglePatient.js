@@ -44,7 +44,7 @@ const SinglePatient = () => {
   };
 
   if (!patient) {
-    return <p className={styles.loadingText}>Loading patient data...</p>;
+    return <p className={styles.loadingText}>Ładowanie pacjentów z bazy...</p>;
   }
 
   if (!user) {
@@ -77,7 +77,7 @@ const SinglePatient = () => {
         <button className={styles.buttonRed} onClick={handleShow}>Wypisz</button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Are you sure?</Modal.Title>
+            <Modal.Title>Napewno ?</Modal.Title>
           </Modal.Header>
           <Modal.Body>Czy jesteś pewny/a ? Ta operacja jest nieodwracalna!</Modal.Body>
           <Modal.Footer>

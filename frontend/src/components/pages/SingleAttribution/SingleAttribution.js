@@ -60,7 +60,7 @@ const SingleAttribution = () => {
   const patient = getPatientById({ patients }, attribution.idPatient);
 
   if (!attribution || !hospital || !branch || !patient) {
-    return <p className={styles.loadingText}>Loading attribution data...</p>;
+    return <p className={styles.loadingText}>Ładowanie...</p>;
   }
 
   if (!user) {

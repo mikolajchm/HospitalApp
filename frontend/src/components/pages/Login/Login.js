@@ -87,27 +87,27 @@ const Login = () => {
 
           {status === 'success' && (
             <Alert variant="success" className={styles.loginAlert}>
-              <Alert.Heading>Success!</Alert.Heading>
-              <p>You have been successfully logged in!</p>
+              <Alert.Heading>Sukces !</Alert.Heading>
+              <p>Logowanie się udało !</p>
             </Alert>
           )}
 
           {status === 'serverError' && (
             <Alert variant="danger" className={styles.loginAlert}>
-              <Alert.Heading>Something went wrong...</Alert.Heading>
+              <Alert.Heading>Coś poszło nie tak...</Alert.Heading>
             </Alert>
           )}
 
           {status === 'clientError' && (
             <Alert variant="danger" className={styles.loginAlert}>
-              <Alert.Heading>Incorrect login or password</Alert.Heading>
+              <Alert.Heading>Login lub hasło nie prawidłowe...</Alert.Heading>
             </Alert>
           )}
 
           {status === 'loading' && (
             <div className={styles.spinnerWrapper}>
               <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
+                <span className="visually-hidden">Ładowanie...</span>
               </Spinner>
             </div>
           )}

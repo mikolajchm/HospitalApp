@@ -21,7 +21,7 @@ const AllAttributions = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   if (!attributions || attributions.length === 0 || !patients || patients.length === 0) {
-    return <p className={styles.loadingText}>Loading...</p>;
+    return <p className={styles.loadingText}>Ładowanie...</p>;
   }
 
   const handleShow = (id) => {

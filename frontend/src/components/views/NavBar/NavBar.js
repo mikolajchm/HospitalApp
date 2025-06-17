@@ -28,7 +28,7 @@ const NavBar = () => {
                     Zarejestruj użytkownika
                   </Nav.Link>
                   <Nav.Link as={Link} to="/users" className={styles.navLink}>
-                    Zarządaj użytkownikami
+                    Zarządzaj użytkownikami
                   </Nav.Link>
                 </>
               )}

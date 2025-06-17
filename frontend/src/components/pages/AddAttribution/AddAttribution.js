@@ -24,7 +24,7 @@ const AddAttribution = () => {
   const [idPatient, setIdPatient] = useState('');
   const [idHospital, setIdHospital] = useState('');
   const [idBranch, setIdBranch] = useState('');
-  const [idDoctor] = useState(user.id);
+  const [idDoctor, setIdDoctor] = useState(user.id);
   const [priority, setPriority] = useState('');
   const [date, setDate] = useState('');
   const [condition, setCondition] = useState('');
@@ -42,12 +42,14 @@ const AddAttribution = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!idPatient || !idHospital || !idBranch || !priority || !idDoctor || !date || !condition || !description) {
+
+    if (!idPatient || !idBranch || !idHospital || !priority || !idDoctor || !date || !condition || !description) {
       setStatus('danger');
       return;
     }
 
-    const payload = { idPatient, idHospital, idBranch, priority, idDoctor, date, condition, description };
+    const payload = { idPatient, idHospital, idBranch, idDoctor, priority, date, condition, description };
+    
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

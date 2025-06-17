@@ -21,7 +21,7 @@ const AddPatient = () => {
   const [attribution] = useState(null);
   const [status, setStatus] = useState(null);
 
-  const user = useSelector(getUser)
+  const user = useSelector(getUser);
 
   useEffect(() => {
     if (status === 'success') {
