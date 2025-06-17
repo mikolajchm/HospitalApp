@@ -6,7 +6,9 @@ import styles from './Users.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 const Users = () => {
+  
   const loggedUser = useSelector(getUser);
+  console.log(loggedUser,'zalogowany');
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const Users = () => {
   }
 
   const filteredUsers = users.filter(user => user._id !== loggedUser.id);
-
+  console.log(filteredUsers,'tablica filtrowana ');
   if (filteredUsers.length === 0) {
     return <p className={styles.loadingText}>Brak innych użytkowników.</p>;
   }

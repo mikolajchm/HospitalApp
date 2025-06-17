@@ -66,7 +66,7 @@ exports.login = async (req, res) => {
 
       if (isPasswordCorrect) {
         req.session.user = {
-          userId: user._id,
+          id: user._id,
           login: user.login,
           firstName: user.firstName,
           lastName: user.lastName,
