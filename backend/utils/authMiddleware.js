@@ -1,29 +1,37 @@
 const Session = require("../models/Session.model");
 
 const authMiddleware = async (req, res, next) => {
-  if (process.env.NODE_ENV !== "production") {
-    try {
-      const sessionId = req.sessionID;
-
-      if (!sessionId) {
-        return res.status(401).send({ message: "You are not authorized (no session)" });
-      }
-
-      const sessionRecord = await Session.findOne({ _id: sessionId });
-      if (!sessionRecord) {
-        return res.status(401).send({ message: "You are not authorized (session not found)" });
-      }
-
-      next();
-    } catch (err) {
-      return res.status(401).send({ message: "You are not authorized" });
+  try {
+    if (!req.session.user || !req.session.user.id) {
+      return res
+        .status(401)
+        .send({ message: "You are not authorized (missing user)" });
     }
-  } else {
-    if (req.session.user) {
-      next();
-    } else {
-      res.status(401).send({ message: "You are not authorized" });
+
+    const allSessions = await Session.find({});
+
+    const match = allSessions.find((sessionDoc) => {
+      try {
+        const data = JSON.parse(sessionDoc.session);
+        return data.user && data.user.id === req.session.user.id;
+      } catch (e) {
+        return false;
+      }
+    });
+
+    if (!match) {
+      return res
+        .status(401)
+        .send({
+          message: "You are not authorized (user not found in sessions)",
+        });
     }
+
+    next();
+  } catch (err) {
+    return res
+      .status(401)
+      .send({ message: "You are not authorized (middleware error)" });
   }
 };
 

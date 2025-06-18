@@ -55,7 +55,6 @@ const EditPatient = () => {
         priority,
         age,
       }),
-      credentials: 'include',
     };
 
     setStatus('loading');

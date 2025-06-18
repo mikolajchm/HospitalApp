@@ -1,38 +1,39 @@
-const Session = require('../models/Session.model');
+const Session = require("../models/Session.model");
 
 const adminMiddleware = async (req, res, next) => {
   try {
-    let user;
-
-    if (process.env.NODE_ENV !== 'production') {
-
-      const sessionId = req.sessionID;
-
-      if (!sessionId) {
-        return res.status(401).send({ message: 'You are not authorized (no session)' });
-      }
-
-      const sessionRecord = await Session.findOne({ _id: sessionId });
-      if (!sessionRecord) {
-        return res.status(401).send({ message: 'You are not authorized (session not found)' });
-      }
-
-      const sessionData = JSON.parse(sessionRecord.session);
-      user = sessionData.user;
-
-    } else {
-      user = req.session?.user;
+    if (!req.session.user || !req.session.user.id) {
+      return res
+        .status(401)
+        .send({ message: "You are not authorized (missing user)" });
     }
 
-    if (!user || user.role !== 'Admin') {
-      return res.status(403).send({ message: 'You are not admin' });
+    const allSessions = await Session.find({});
+
+    const match = allSessions.find((sessionDoc) => {
+      try {
+        const data = JSON.parse(sessionDoc.session);
+        return (
+          data.user &&
+          data.user.id === req.session.user.id &&
+          data.user.role === "Admin"
+        );
+      } catch (e) {
+        return false;
+      }
+    });
+
+    if (!match) {
+      return res.status(403).send({
+        message: "Access denied. Admin privileges required.",
+      });
     }
 
     next();
-
   } catch (err) {
-    console.error(err);
-    return res.status(401).send({ message: 'You are not authorized' });
+    return res
+      .status(401)
+      .send({ message: "You are not authorized (middleware error)" });
   }
 };
 

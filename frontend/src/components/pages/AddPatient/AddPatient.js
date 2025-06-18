@@ -53,7 +53,6 @@ const AddPatient = () => {
         age,
         attribution
       }),
-      credentials: 'include',
     };
 
     setStatus('loading');

@@ -29,7 +29,6 @@ const SinglePatient = () => {
     
     const options = {
       method: 'DELETE',
-      credentials: 'include',
     };
 
     fetch(`${API_URL}/patient/${id}`, options)

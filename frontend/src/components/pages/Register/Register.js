@@ -53,7 +53,6 @@ const Register = () => {
         password, 
         role 
       }),
-      credentials: 'include',
     };
 
     setStatus('loading');

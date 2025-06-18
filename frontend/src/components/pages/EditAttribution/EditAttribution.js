@@ -77,7 +77,6 @@ const EditAttribution = () => {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      credentials: 'include',
     })
       .then(res => {
         if (res.ok) setStatus('success');
