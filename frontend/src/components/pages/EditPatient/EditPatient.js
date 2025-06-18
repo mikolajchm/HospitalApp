@@ -22,7 +22,7 @@ const EditPatient = () => {
   const [firstName, setFirstName] = useState(patient.firstName || '');
   const [lastName, setLastName] = useState(patient.lastName || '');
   const [peselNum, setPeselNum] = useState(patient.peselNum || '');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState(patient.gender || '');
   const [age, setAge] = useState(patient.age || '');
   const [status, setStatus] = useState(null);
 
