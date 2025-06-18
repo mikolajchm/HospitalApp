@@ -1,4 +1,5 @@
 const Patient = require('../models/Patient.model');
+const Attribution = require('../models/Attribution.model');
 
 exports.patients = async (req, res) => {
   try {
@@ -69,14 +70,17 @@ exports.post = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    const patient = await Patient.findById( req.params.id );
-    
+    const patient = await Patient.findById(req.params.id);
+
     if (!patient) {
       return res.status(404).send({ message: 'Patient not found with this ID' });
-    } 
+    }
+
+    await Attribution.deleteMany({ idPatient: req.params.id });
 
     await Patient.deleteOne({ _id: req.params.id });
-    res.status(200).send({ message: 'Deleted !' });
+
+    res.status(200).send({ message: 'Deleted!' });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
