@@ -28,7 +28,8 @@ const SinglePatient = () => {
     e.preventDefault(); 
     
     const options = {
-      method: 'DELETE'
+      method: 'DELETE',
+      credentials: 'include',
     };
 
     fetch(`${API_URL}/patient/${id}`, options)

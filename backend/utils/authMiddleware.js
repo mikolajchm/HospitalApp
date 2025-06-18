@@ -1,25 +1,28 @@
-const Session = require('../models/Session.model');
+const Session = require("../models/Session.model");
 
 const authMiddleware = async (req, res, next) => {
   if (process.env.NODE_ENV !== "production") {
     try {
+      const sessionId = req.sessionID;
 
-      const sessionExists = await Session.exists({ _id: req.sessionID });
+      if (!sessionId) {
+        return res.status(401).send({ message: "You are not authorized (no session)" });
+      }
 
-      if (!sessionExists) {
-        return res.status(401).send({ message: 'You are not authorized' });
+      const sessionRecord = await Session.findOne({ _id: sessionId });
+      if (!sessionRecord) {
+        return res.status(401).send({ message: "You are not authorized (session not found)" });
       }
 
       next();
-
     } catch (err) {
-      return res.status(401).send({ message: 'You are not authorized' });
+      return res.status(401).send({ message: "You are not authorized" });
     }
   } else {
     if (req.session.user) {
       next();
     } else {
-      res.status(401).send({ message: 'You are not authorized' });
+      res.status(401).send({ message: "You are not authorized" });
     }
   }
 };

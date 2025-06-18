@@ -49,6 +49,7 @@ const Users = () => {
     try {
       const response = await fetch(`${API_URL}/auth/userremove/${id}`, {
         method: 'DELETE',
+        credentials: 'include',
       });
 
       if (response.ok) {

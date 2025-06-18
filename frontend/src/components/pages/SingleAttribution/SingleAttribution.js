@@ -38,7 +38,7 @@ const SingleAttribution = () => {
   const handleRemove = (e) => {
     e.preventDefault(); 
 
-    const options = { method: 'DELETE' };
+    const options = { method: 'DELETE', credentials: 'include' };
 
     fetch(`${API_URL}/attribution/${id}`, options)
       .then(res => {

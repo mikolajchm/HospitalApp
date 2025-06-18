@@ -4,8 +4,8 @@ const authMiddleware = require('../utils/authMiddleware');
 
 const branch = require('../controllers/branches.controller');
 
-router.get('/branches', authMiddleware, branch.branches);
-router.get('/branch/:id', authMiddleware, branch.byId);
-router.get('/branchHosp/:id', authMiddleware, branch.byHospitalId);
+router.get('/branches', branch.branches);
+router.get('/branch/:id', branch.byId);
+router.get('/branchHosp/:id', branch.byHospitalId);
 
 module.exports = router;

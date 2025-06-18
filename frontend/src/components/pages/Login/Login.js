@@ -34,11 +34,13 @@ const Login = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ login, password }),
+        credentials: 'include',
       });
 
       if (loginRes.status === 200) {
         const userRes = await fetch(`${API_URL}/auth/logged`, {
           method: 'GET',
+          credentials: 'include',
         });
 
         if (!userRes.ok) throw new Error('User fetch failed');
