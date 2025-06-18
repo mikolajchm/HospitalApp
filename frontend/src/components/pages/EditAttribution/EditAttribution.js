@@ -30,6 +30,7 @@ const EditAttribution = () => {
   const [idPatient, setIdPatient] = useState('');
   const [idHospital, setIdHospital] = useState('');
   const [idBranch, setIdBranch] = useState('');
+  const [priority, setPriority] = useState('');
   const [date, setDate] = useState('');
   const [condition, setCondition] = useState('');
   const [description, setDescription] = useState('');
@@ -39,6 +40,7 @@ const EditAttribution = () => {
       setIdPatient(attribution.idPatient || '');
       setIdHospital(attribution.idHospital || '');
       setIdBranch(attribution.idBranch || '');
+      setPriority(attribution.priority || '');
       setDate(attribution.date ? attribution.date.substring(0, 10) : '');
       setCondition(attribution.condition || '');
       setDescription(attribution.description || '');
@@ -57,7 +59,7 @@ const EditAttribution = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (!idPatient || !idHospital || !idBranch || !date || !condition || !description) {
+    if (!idPatient || !idHospital || !idBranch || !date || !priority || !condition || !description) {
       setStatus('danger');
       return;
     }
@@ -67,6 +69,7 @@ const EditAttribution = () => {
       idHospital,
       idBranch,
       idDoctor: user.id,
+      priority,
       date,
       condition,
       description,
@@ -163,6 +166,19 @@ const EditAttribution = () => {
           min={minDate}
           onChange={e => setDate(e.target.value)}
         />
+      </Form.Group>
+
+      <Form.Group className={styles.inputGroup}>
+        <Form.Label>Priorytet:</Form.Label>
+        <Form.Select
+          value={priority}
+          onChange={e => setPriority(e.target.value)}
+          className={styles.select}
+        >
+          <option value="">Wybierz</option>
+          <option value="high">Pilny</option>
+          <option value="normal">Zwykły</option>
+        </Form.Select>
       </Form.Group>
 
       <Form.Group className={styles.inputGroup}>

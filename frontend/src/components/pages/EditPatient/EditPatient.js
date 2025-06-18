@@ -22,7 +22,7 @@ const EditPatient = () => {
   const [firstName, setFirstName] = useState(patient.firstName || '');
   const [lastName, setLastName] = useState(patient.lastName || '');
   const [peselNum, setPeselNum] = useState(patient.peselNum || '');
-  const [priority, setPriority] = useState(patient.priority || '');
+  const [gender, setGender] = useState('');
   const [age, setAge] = useState(patient.age || '');
   const [status, setStatus] = useState(null);
 
@@ -38,7 +38,7 @@ const EditPatient = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !peselNum || !priority || !age) {
+    if (!firstName || !lastName || !peselNum || !gender || !age) {
       setStatus('danger');
       return;
     }
@@ -52,8 +52,8 @@ const EditPatient = () => {
         firstName,
         lastName,
         peselNum,
-        priority,
-        age,
+        gender,
+        age
       }),
     };
 
@@ -128,15 +128,15 @@ const EditPatient = () => {
       </Form.Group>
 
       <Form.Group className={styles.inputGroup}>
-        <Form.Label className={styles.label}>Priorytet:</Form.Label>
+        <Form.Label className={styles.label}>Płeć:</Form.Label>
         <Form.Select
-          value={priority}
-          onChange={e => setPriority(e.target.value)}
+          value={gender}
+          onChange={e => setGender(e.target.value)}
           className={styles.select}
         >
           <option value="">Wybierz</option>
-          <option value="high">Pilny</option>
-          <option value="normal">Zwykły</option>
+          <option value="Kobieta">Kobieta</option>
+          <option value="Mężczyzna">Mężczyzna</option>
         </Form.Select>
       </Form.Group>
 
