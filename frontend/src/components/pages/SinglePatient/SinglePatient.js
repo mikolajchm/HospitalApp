@@ -77,7 +77,7 @@ const SinglePatient = () => {
         <button className={styles.buttonRed} onClick={handleShow}>Wypisz</button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Napewno ?</Modal.Title>
+            <Modal.Title>Na pewno ?</Modal.Title>
           </Modal.Header>
           <Modal.Body>Czy jesteś pewny/a ? Ta operacja jest nieodwracalna!</Modal.Body>
           <Modal.Footer>

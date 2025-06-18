@@ -1,62 +1,91 @@
-$form-border-color: #ced4da;
-$form-focus-color: #66afe9;
-$danger-color: #dc3545;
-$success-color: #198754;
-$gray-color: #6c757d;
+$form-bg: #ffffff;
+$accent-color: #007bff;
+$text-color: #222;
+$border-color: #e0e0e0;
+$hover-blue: #0056b3;
 
 .formWrapper {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #72ffef74;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: $form-bg;
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.8s ease-out;
 }
 
 .heading {
+  text-align: center;
+  color: $accent-color;
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: white;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
 }
 
 .inputGroup {
-  margin-bottom: 1.25rem;
-}
+  margin-bottom: 1.5rem;
 
-.label {
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-  display: block;
-  color: #333;
-}
+  label {
+    font-weight: 500;
+    color: $text-color;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
 
-.input,
-.select {
-  width: 100%;
-  padding: 0.65rem 1rem;
-  border: 1px solid $form-border-color;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  transition: border-color 0.2s ease;
+  select,
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: $text-color;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
 
-  &:focus {
-    outline: none;
-    border-color: $form-focus-color;
-    box-shadow: 0 0 0 0.2rem rgba($form-focus-color, 0.25);
+    &:focus {
+      border-color: $accent-color;
+      outline: none;
+      background-color: #fff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    }
   }
 }
 
-.note {
-  font-size: 0.875rem;
-  color: $gray-color;
-  margin-top: 0.25rem;
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.button {
+  background: linear-gradient(135deg, $accent-color, #00bfff);
+  border: none;
+  color: white;
+  padding: 0.7rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #00bfff, $accent-color);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
 }
 
 .alert {
+  text-align: center;
+  font-weight: 500;
   margin-bottom: 1rem;
-  font-size: 0.95rem;
+  border-radius: 10px;
 }
 
 .spinner {
@@ -65,27 +94,13 @@ $gray-color: #6c757d;
   margin-bottom: 1rem;
 }
 
-.buttonWrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-
-.button {
-  padding: 0.75rem 2rem;
-  font-size: 1.1rem;
-  background-color: #356efd;
-  border: none;
-  border-radius: 0.5rem;
-  color: #fff;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: #0f46d0;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
-
-  &:disabled {
-    background-color: #5d8bff;
-    cursor: not-allowed;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

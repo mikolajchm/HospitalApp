@@ -88,8 +88,18 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    await req.session.destroy(() => {});
-    await Session.deleteMany({});
+
+    await new Promise((resolve, reject) => {
+      req.session.destroy(err => {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
+
+    if (req.sessionID) {
+      await Session.deleteOne({ _id: req.sessionID });
+    }
+
     res.status(202).send({ message: 'Logout successful' });
   } catch (err) {
     res.status(500).send({ message: err.message });

@@ -58,6 +58,12 @@ app.use('/', (req, res) => {
   res.status(404).send('notFound');
 });
 
+app.use((req, res, next) => {
+  res.setHeader("Referrer-Policy", "no-referrer");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+});
+
 app.listen('8000', () => {
   console.log('Server is running on port: 8000');
 });

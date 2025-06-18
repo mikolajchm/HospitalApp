@@ -20,7 +20,6 @@ const SingleBranch = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Przypisania dla oddziału</h1>
       <div className={styles.grid}>
         {branchAttributions.map(attr => (
           <div key={attr._id} className={styles.card}>
