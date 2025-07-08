@@ -3,7 +3,7 @@
 ─────────────────────────────────────────────────────────────────────────────── -->
 
 # HospitalApp 🏥  
-> **MERN Stack • Full CRUD • Custom Auth • File Upload • Role-based Access**
+> **MERN Stack • Full CRUD • Custom Auth • Role-based Access**
 
 HospitalApp is a full-stack hospital management system.  
 It allows medical staff to manage patients, visits, wards, and hospital data in one place.  
